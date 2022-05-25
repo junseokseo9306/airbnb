@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="imageUrl"
+            type="com.example.airbnb.data.Image" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,8 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/where_do_you_want_to_travel"
-            android:textSize="24sp"
-            android:textStyle="bold"
+            style="@style/AirbnbFontStyle.Headline6"
             app:layout_constraintBottom_toTopOf="@id/view_guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,12 +47,35 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            image="@{imageUrl.imageUrl}"
+            android:id="@+id/iv_hero_image"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_guideline" />
+
+        <TextView
+            android:layout_marginTop="32dp"
+            android:id="@+id/tv_travel_nearby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/lookup_close_place"
+            style="@style/AirbnbFontStyle.Headline5"
+            app:layout_constraintBottom_toTopOf="@id/rv_cities"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_hero_image" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_cities"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/iv_hero_image"
-            app:layout_constraintTop_toBottomOf="@id/view_guideline"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/tv_travel_nearby" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -6,4 +6,6 @@
     <string name="my_reservation">내 예약</string>
     <string name="wish_list">위시리스트</string>
     <string name="search">검색</string>
+    <string name="lookup_close_place">가까운 여행지 둘러보기</string>
+    <string name="drive_time">차로 시간 거리</string>
 </resources>
