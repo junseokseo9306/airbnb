@@ -25,9 +25,9 @@
 
         <TextView
             android:id="@+id/tv_where_to_travel"
-            android:layout_width="360dp"
+            android:layout_width="348dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:text="@string/where_do_you_want_to_travel"
             style="@style/AirbnbFontStyle.Headline6"
             app:layout_constraintBottom_toTopOf="@id/view_guideline"
