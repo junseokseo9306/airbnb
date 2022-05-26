@@ -1,6 +1,7 @@
 package com.example.airbnb.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.example.airbnb.R
 import com.example.airbnb.data.Image
 import com.example.airbnb.databinding.FragmentHomeBinding
 import com.example.airbnb.di.NetworkModule
+import com.example.airbnb.model.City
 import com.example.airbnb.viewmodels.HomeViewModel
 import kotlinx.coroutines.launch
 

@@ -1,15 +1,15 @@
 package com.example.airbnb.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.airbnb.R
-import com.example.airbnb.viewmodels.HomeViewModel
 import com.example.airbnb.databinding.ActivityMainBinding
+import com.example.airbnb.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
