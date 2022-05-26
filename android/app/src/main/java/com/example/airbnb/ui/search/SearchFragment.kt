@@ -1,4 +1,4 @@
-package com.example.airbnb.ui
+package com.example.airbnb.ui.search
 
 import android.content.Context
 import android.os.Bundle
