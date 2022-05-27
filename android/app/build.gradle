@@ -86,4 +86,7 @@ dependencies {
     //gps
     implementation 'com.google.android.gms:play-services-auth:20.2.0'
 
+    //swipeRefresh
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
 }

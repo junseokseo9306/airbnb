@@ -1,6 +1,7 @@
 package com.example.airbnb.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +14,13 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.airbnb.R
+import com.example.airbnb.data.CityInfo
 import com.example.airbnb.data.Image
 import com.example.airbnb.databinding.FragmentHomeBinding
 import com.example.airbnb.di.NetworkModule
 import com.example.airbnb.viewmodels.HomeViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -41,7 +45,7 @@ class HomeFragment : Fragment() {
         binding.imageUrl = Image(NetworkModule.HERO_IMAGE_URL)
 
         setupViews()
-        setupObservers()
+        setupObserver()
         onTextClicked()
     }
 
@@ -51,11 +55,24 @@ class HomeFragment : Fragment() {
         binding.rvCities.layoutManager = gridLayoutManager
     }
 
-    private fun setupObservers() {
+    private fun setupObserver() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                viewModel.homeContent.zip(viewModel.cityTime) { element1, element2 ->
+//                    Log.d("homeFragment", "element : ${element1.size}")
+//                    Log.d("homeFragment", "element : ${element2.size}")
+//                    val cityInfoList = mutableListOf<CityInfo>()
+//                    for(index in 1 until element1.size) {
+//                        cityInfoList.add(CityInfo(element1[index], element2[index]))
+//                    }
+//                    adapter.submitList(cityInfoList)
+//                }.collect()
                 viewModel.homeContent.collect {
-                    adapter.submitList(it)
+                    val cityInfoList = mutableListOf<CityInfo>()
+                    it.forEach { city ->
+                        cityInfoList.add(CityInfo(city, 30))
+                    }
+                    adapter.submitList(cityInfoList)
                 }
             }
         }

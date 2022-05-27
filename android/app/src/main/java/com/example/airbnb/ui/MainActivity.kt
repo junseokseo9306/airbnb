@@ -13,12 +13,12 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.airbnb.BuildConfig
 import com.example.airbnb.R
 import com.example.airbnb.databinding.ActivityMainBinding
 import com.example.airbnb.viewmodels.HomeViewModel
@@ -42,16 +42,16 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setContentView(binding.root)
 
-        getMyLocation()
+        homeViewModel.loadContents()
 
-        homeViewModel.loadHomeContents()
         setupNav()
+        requestPermission()
+        makeRefreshLocation()
+        requestLocationUpdates()
+        getLastLocation()
+
     }
 
-    override fun onStop() {
-        super.onStop()
-        locationManager.removeUpdates(locationListener)
-    }
 
     private fun setupNav() {
         val navController = supportFragmentManager.findFragmentById(R.id.navigation_fragment_main)
@@ -77,7 +77,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun getMyLocation() {
+    private fun makeRefreshLocation() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            getLastLocation()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun requestLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -86,13 +94,6 @@ class MainActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            requestPermissions(
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ),
-                PERMISSION_REQUEST_CODE
-            )
             return
         }
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
@@ -100,15 +101,74 @@ class MainActivity : AppCompatActivity() {
         locationListener = LocationListener { location ->
             val latitude = location.latitude
             val longitude = location.longitude
+            Log.d("activity", "latitude : $latitude, longitude : $longitude")
         }
 
         locationManager.requestLocationUpdates(
             LocationManager.GPS_PROVIDER,
-            10000L,
+            1000L,
             10.0F,
             locationListener
         )
     }
+
+    private fun getLastLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+        val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        if (location != null) {
+            homeViewModel.setMyLocation(location.latitude, location.longitude)
+        }
+        Log.d("Activity", location?.latitude.toString())
+    }
+
+    private fun checkPermissions(): Boolean {
+        return PackageManager.PERMISSION_GRANTED == ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
+    }
+
+    private fun requestPermission() {
+        val shouldProvideRationale = ActivityCompat.shouldShowRequestPermissionRationale(
+            this,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
+
+        if (shouldProvideRationale) {
+            Snackbar.make(
+                binding.root,
+                R.string.permission_rationale,
+                Snackbar.LENGTH_INDEFINITE
+            )
+                .setAction(getString(R.string.ok)) {
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        ), PERMISSION_REQUEST_CODE
+                    )
+                }.show()
+
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                ), PERMISSION_REQUEST_CODE
+            )
+        }
+    }
+
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onRequestPermissionsResult(
@@ -119,44 +179,28 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             PERMISSION_REQUEST_CODE -> {
-                if ((grantResults.isEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                if (grantResults.isEmpty()) {
                     Snackbar.make(binding.root, "Permission Granted", Snackbar.LENGTH_LONG).show()
+                } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    requestLocationUpdates()
                 } else {
-                    if (shouldShowRequestPermissionRationale(
-                            Manifest.permission.ACCESS_FINE_LOCATION
-                        )
-                    ) {
-                        requestPermissions(
-                            arrayOf(
-                                Manifest.permission.ACCESS_FINE_LOCATION,
-                                Manifest.permission.ACCESS_COARSE_LOCATION
-                            ), PERMISSION_REQUEST_CODE
-                        )
-                    } else {
-                        showDialogToGetPermission()
-                    }
+                    Snackbar.make(
+                        binding.root,
+                        getString(R.string.permission_rationale),
+                        Snackbar.LENGTH_INDEFINITE
+                    )
+                        .setAction(getString(R.string.settings)) {
+                            val intent = Intent()
+                            intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                            val uri = Uri.fromParts("package", BuildConfig.APPLICATION_ID, null)
+                            intent.data = uri
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                            startActivity(intent)
+                        }
+                        .show()
                 }
             }
         }
     }
-
-    private fun showDialogToGetPermission() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Permisisons request")
-            .setMessage(
-                "We need the location permission for some reason. You need to move on Settings to grant some permissions"
-            )
-
-        builder.setPositiveButton("OK") { _, _ ->
-            val intent = Intent(
-                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                Uri.fromParts("package", packageName, null)
-            )
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)   // 6
-        }
-        val dialog = builder.create()
-        dialog.show()
-    }
-
 }
+
