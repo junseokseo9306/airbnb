@@ -3,10 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="imageUrl"
             type="com.example.airbnb.data.Image" />
     </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -24,11 +26,11 @@
 
         <TextView
             android:id="@+id/tv_where_to_travel"
+            style="@style/AirbnbFontStyle.Headline6"
             android:layout_width="348dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:text="@string/where_do_you_want_to_travel"
-            style="@style/AirbnbFontStyle.Headline6"
             app:layout_constraintBottom_toTopOf="@id/view_guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,8 +48,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            image="@{imageUrl.imageUrl}"
             android:id="@+id/iv_hero_image"
+            image="@{imageUrl.imageUrl}"
             android:layout_width="match_parent"
             android:layout_height="400dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,13 +57,13 @@
             app:layout_constraintTop_toBottomOf="@id/view_guideline" />
 
         <TextView
-            android:layout_marginTop="32dp"
             android:id="@+id/tv_travel_nearby"
+            style="@style/AirbnbFontStyle.Headline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
             android:text="@string/lookup_close_place"
-            style="@style/AirbnbFontStyle.Headline5"
             app:layout_constraintBottom_toTopOf="@id/rv_cities"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_hero_image" />

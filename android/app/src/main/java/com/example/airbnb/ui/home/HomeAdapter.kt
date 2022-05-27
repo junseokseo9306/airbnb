@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.airbnb.data.CityInfo
 import com.example.airbnb.databinding.HomeCityItemBinding
 import com.example.airbnb.model.City
 
 class HomeAdapter(private val onItemClicked: () -> Unit) :
-    ListAdapter<City, HomeAdapter.HomeViewHolder>(CityDiffUtil) {
+    ListAdapter<CityInfo, HomeAdapter.HomeViewHolder>(CityDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -25,19 +26,19 @@ class HomeAdapter(private val onItemClicked: () -> Unit) :
         private val onItemClicked: () -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(city: City) {
-            binding.city = city
+        fun bind(cityInfo: CityInfo) {
+            binding.cityInfo = cityInfo
             itemView.setOnClickListener {
                 onItemClicked()
             }
         }
     }
 
-    private object CityDiffUtil : DiffUtil.ItemCallback<City>() {
-        override fun areItemsTheSame(oldItem: City, newItem: City): Boolean =
+    private object CityDiffUtil : DiffUtil.ItemCallback<CityInfo>() {
+        override fun areItemsTheSame(oldItem: CityInfo, newItem: CityInfo): Boolean =
             oldItem.hashCode() == newItem.hashCode()
 
-        override fun areContentsTheSame(oldItem: City, newItem: City): Boolean =
+        override fun areContentsTheSame(oldItem: CityInfo, newItem: CityInfo): Boolean =
             oldItem == newItem
     }
 }
