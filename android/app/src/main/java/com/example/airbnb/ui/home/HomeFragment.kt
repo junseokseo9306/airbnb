@@ -18,9 +18,9 @@ import com.example.airbnb.data.CityInfo
 import com.example.airbnb.data.Image
 import com.example.airbnb.databinding.FragmentHomeBinding
 import com.example.airbnb.di.NetworkModule
+import com.example.airbnb.model.City
 import com.example.airbnb.viewmodels.HomeViewModel
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -50,7 +50,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupViews() {
-        val gridLayoutManager = GridLayoutManager(this.context, 2, GridLayoutManager.HORIZONTAL, false)
+        val gridLayoutManager =
+            GridLayoutManager(this.context, 2, GridLayoutManager.HORIZONTAL, false)
         binding.rvCities.adapter = adapter
         binding.rvCities.layoutManager = gridLayoutManager
     }
@@ -58,21 +59,8 @@ class HomeFragment : Fragment() {
     private fun setupObserver() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                viewModel.homeContent.zip(viewModel.cityTime) { element1, element2 ->
-//                    Log.d("homeFragment", "element : ${element1.size}")
-//                    Log.d("homeFragment", "element : ${element2.size}")
-//                    val cityInfoList = mutableListOf<CityInfo>()
-//                    for(index in 1 until element1.size) {
-//                        cityInfoList.add(CityInfo(element1[index], element2[index]))
-//                    }
-//                    adapter.submitList(cityInfoList)
-//                }.collect()
-                viewModel.homeContent.collect {
-                    val cityInfoList = mutableListOf<CityInfo>()
-                    it.forEach { city ->
-                        cityInfoList.add(CityInfo(city, 30))
-                    }
-                    adapter.submitList(cityInfoList)
+                viewModel.cityInfo.collect {
+                    adapter.submitList(it)
                 }
             }
         }
