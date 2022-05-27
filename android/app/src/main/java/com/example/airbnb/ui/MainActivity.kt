@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity() {
         if (location != null) {
             homeViewModel.setMyLocation(location.latitude, location.longitude)
         }
-        Log.d("Activity", location?.latitude.toString())
+        Log.d("Activity", location.toString())
     }
 
     private fun checkPermissions(): Boolean {
@@ -187,7 +187,7 @@ class MainActivity : AppCompatActivity() {
                     Snackbar.make(
                         binding.root,
                         getString(R.string.permission_rationale),
-                        Snackbar.LENGTH_INDEFINITE
+                        Snackbar.LENGTH_LONG
                     )
                         .setAction(getString(R.string.settings)) {
                             val intent = Intent()
