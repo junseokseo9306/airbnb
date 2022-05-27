@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        tools:context=".ui.SearchFragment">
+        tools:context=".ui.search.SearchFragment">
 
         <ImageButton
             android:id="@+id/back_main_button"
