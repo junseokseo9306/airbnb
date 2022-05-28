@@ -1,24 +1,25 @@
 package com.example.airbnb.repository
 
+import android.util.Log
 import com.example.airbnb.datasource.TmapDataSource
 import com.example.airbnb.dto.toTmap
 import com.example.airbnb.model.Tmap
 import com.example.airbnb.network.TmapRequest
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class TmapRepositoryImpl @Inject constructor(
     private val tmapDataSource: TmapDataSource
 ) : TmapRepository {
-    override suspend fun getTime(tmapRequest: TmapRequest): Flow<Tmap> {
-        lateinit var tmapTime: Tmap
-        tmapDataSource.getTime(tmapRequest).collect { tmapDto ->
-            tmapTime = tmapDto.toTmap()
-        }
-        return flow {
-            emit(tmapTime)
-        }
+    override fun getTime(tmapRequest: TmapRequest): Flow<Tmap> {
+        val tmapTime = MutableSharedFlow<Tmap>(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+
+        tmapDataSource.getTime(tmapRequest).buffer().onEach { tmapDto ->
+            tmapTime.emit(tmapDto.toTmap())
+        }.launchIn(CoroutineScope(Dispatchers.Main.immediate))
+
+        return tmapTime
     }
 }

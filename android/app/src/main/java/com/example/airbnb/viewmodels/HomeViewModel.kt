@@ -56,6 +56,7 @@ class HomeViewModel @Inject constructor(
             }.toMutableList()
 
             getTimeToCity(myLongitude.value, myLatitude.value, citiesCoordinate)
+            Log.d("viewModel", "mylongitude ${myLongitude.value} my latitude ${myLatitude.value}")
         }
     }
 
@@ -68,6 +69,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             val start = System.currentTimeMillis()
             for (index in cityCoords.indices) {
+                delay(400)
                 tmapRepository.getTime(
                     TmapRequest(
                         myLongitude,
@@ -76,6 +78,7 @@ class HomeViewModel @Inject constructor(
                         cityCoords[index].longitude
                     )
                 ).buffer().onEach {
+                    Log.d("viewModel", it.totalMinute.toString())
                     _cityInfo.setList(
                         CityInfo(
                             homeContent.value[index],
@@ -85,7 +88,7 @@ class HomeViewModel @Inject constructor(
                 }.launchIn(this)
             }
             val end = System.currentTimeMillis()
-            Log.d("viewModel", "${(end - start) / 100}")
+            Log.d("viewModel", "${(end - start)} 초")
         }
     }
 
@@ -95,13 +98,14 @@ class HomeViewModel @Inject constructor(
         _myLatitude.value = latitude
         _myLongitude.value = longitude
     }
-
-    private fun <E> MutableStateFlow<MutableList<E>>.setList(element: E?) {
-        val tempList: MutableList<E> = mutableListOf()
-        this.value.let { tempList.addAll(it) }
-        if (element != null) {
-            tempList.add(element)
+    companion object {
+        private fun <E> MutableStateFlow<MutableList<E>>.setList(element: E?) {
+            val tempList: MutableList<E> = mutableListOf()
+            this.value.let { tempList.addAll(it) }
+            if (element != null) {
+                tempList.add(element)
+            }
+            this.value = tempList
         }
-        this.value = tempList
     }
 }

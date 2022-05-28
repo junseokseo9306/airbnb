@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface TmapDataSource {
 
-    suspend fun getTime(tmapRequest: TmapRequest): Flow<TmapDto>
+    fun getTime(tmapRequest: TmapRequest): Flow<TmapDto>
 }

@@ -13,7 +13,7 @@ import javax.inject.Singleton
 class TmapDataSourceImpl @Inject constructor(
     private val tmapApi: TmapApi
 ) : TmapDataSource {
-    override suspend fun getTime(tmapRequest: TmapRequest): Flow<TmapDto> {
+    override fun getTime(tmapRequest: TmapRequest): Flow<TmapDto> {
         return flow {
             emit(
                 tmapApi.getTime(
