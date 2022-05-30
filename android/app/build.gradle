@@ -6,6 +6,8 @@ plugins {
     id 'kotlinx-serialization'
 }
 
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 def apikeyPropertiesFile = rootProject.file("tmapkey.properties")
 def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
