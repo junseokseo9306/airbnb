@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         setupNav()
         requestPermission()
-        makeRefreshLocation()
+//        makeRefreshLocation()
         requestLocationUpdates()
         getLastLocation()
 
@@ -75,15 +75,6 @@ class MainActivity : AppCompatActivity() {
     private fun hideBottomNav() {
         binding.bottomNavigation.visibility = View.GONE
     }
-
-
-    private fun makeRefreshLocation() {
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            getLastLocation()
-            binding.swipeRefreshLayout.isRefreshing = false
-        }
-    }
-
 
     private fun requestLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(
