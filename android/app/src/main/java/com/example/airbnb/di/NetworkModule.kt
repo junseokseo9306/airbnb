@@ -21,7 +21,8 @@ import javax.inject.Singleton
 object NetworkModule {
     private const val BASE_URL = "https://dbe23652-7fd3-4472-b25a-37d99d31e87e.mock.pstmn.io"
     private const val TMAP_URL = "https://apis.openapi.sk.com/tmap/"
-    const val HERO_IMAGE_URL = "https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q202_Luxe_WanakaNZ_LivingRoom_0264-LightOn_R1.jpg?w=1536"
+    const val HERO_IMAGE_URL =
+        "https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q202_Luxe_WanakaNZ_LivingRoom_0264-LightOn_R1.jpg?w=1536"
 
     @Provides
     @Singleton
@@ -49,17 +50,29 @@ object NetworkModule {
             .create(HomeApi::class.java)
     }
 
+//    @OptIn(ExperimentalSerializationApi::class)
+//    private val json = Json {
+//        explicitNulls = false
+//        ignoreUnknownKeys = true
+//    }
+
     @OptIn(ExperimentalSerializationApi::class)
-    private val json = Json {
-        explicitNulls = false
-        ignoreUnknownKeys = true
+    @Provides
+    @Singleton
+    fun provideCustomJson(): Json {
+        return Json {
+            explicitNulls = false
+            ignoreUnknownKeys = true
+        }
     }
+
 
     @OptIn(ExperimentalSerializationApi::class)
     @Provides
     @Singleton
     fun provideTmapApi(
-        okHttpClient: OkHttpClient
+        okHttpClient: OkHttpClient,
+        json: Json
     ): TmapApi {
         val contentType = "application/json".toMediaType()
         return Retrofit.Builder()

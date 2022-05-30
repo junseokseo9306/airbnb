@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.airbnb.data.CityInfo
 import com.example.airbnb.databinding.HomeCityItemBinding
-import com.example.airbnb.model.City
 
 class HomeAdapter(private val onItemClicked: () -> Unit) :
     ListAdapter<CityInfo, HomeAdapter.HomeViewHolder>(CityDiffUtil) {
