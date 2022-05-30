@@ -9,11 +9,10 @@ import com.example.airbnb.network.TmapRequest
 import com.example.airbnb.repository.HomeRepository
 import com.example.airbnb.repository.TmapRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -46,16 +45,12 @@ class HomeViewModel @Inject constructor(
 
     fun loadContents() {
         viewModelScope.launch {
-            launch {
-                homeRepository.loadHomeContents().collect { cities ->
-                    _homeContents.value = cities.toMutableList()
-                }
-            }.join()
-            val citiesCoordinate = _homeContents.value.map { city ->
-                City.Coordinate(city.currentCoordinate.latitude, city.currentCoordinate.longitude)
-            }.toMutableList()
 
-            getTimeToCity(myLongitude.value, myLatitude.value, citiesCoordinate)
+            homeRepository.loadHomeContents().onEach { cities ->
+                _homeContents.value = cities.toMutableList()
+            }.launchIn(this)
+
+            getTimeToCity(myLongitude.value, myLatitude.value, homeContent.value)
             Log.d("viewModel", "mylongitude ${myLongitude.value} my latitude ${myLatitude.value}")
         }
     }
@@ -64,24 +59,24 @@ class HomeViewModel @Inject constructor(
     private fun getTimeToCity(
         myLongitude: Double,
         myLatitude: Double,
-        cityCoords: List<City.Coordinate>
+        cityList: List<City>
     ) {
         viewModelScope.launch {
             val start = System.currentTimeMillis()
-            for (index in cityCoords.indices) {
-                delay(400)
+            for (index in cityList.indices) {
+                delay(500)
                 tmapRepository.getTime(
                     TmapRequest(
                         myLongitude,
                         myLatitude,
-                        cityCoords[index].latitude,
-                        cityCoords[index].longitude
+                        cityList[index].currentCoordinate.latitude,
+                        cityList[index].currentCoordinate.longitude
                     )
                 ).buffer().onEach {
                     Log.d("viewModel", it.totalMinute.toString())
                     _cityInfo.setList(
                         CityInfo(
-                            homeContent.value[index],
+                            cityList[index],
                             it.totalMinute
                         )
                     )
@@ -92,12 +87,13 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    //helper function
 
+    //helper function
     fun setMyLocation(latitude: Double, longitude: Double) {
         _myLatitude.value = latitude
         _myLongitude.value = longitude
     }
+
     companion object {
         private fun <E> MutableStateFlow<MutableList<E>>.setList(element: E?) {
             val tempList: MutableList<E> = mutableListOf()
