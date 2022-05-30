@@ -78,6 +78,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun moveToSearchFragment() {
-        findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        val action =
+            HomeFragmentDirections.actionHomeFragmentToSearchFragment(adapter.currentList.toTypedArray())
+        findNavController().navigate(action)
     }
 }
