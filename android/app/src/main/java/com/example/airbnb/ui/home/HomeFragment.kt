@@ -44,27 +44,31 @@ class HomeFragment : Fragment() {
         setupViews()
         setupObserver()
         onTextClicked()
-        binding.composeView.setContent {
-            AppCompatTheme {
-                val data = listOf(
-                    Accommodation("AA", "BB"),
-                    Accommodation("AA", "CC"),
-                    Accommodation("AA", "DD"),
-                    Accommodation("AA", "EE"),
-                    Accommodation("AA", "FF"),
-                    Accommodation("AA", "GG")
-                )
-
-                AccommodationList(data)
-            }
-        }
     }
 
     private fun setupViews() {
         val gridLayoutManager =
             GridLayoutManager(this.context, 2, GridLayoutManager.HORIZONTAL, false)
-        binding.rvCities.adapter = adapter
-        binding.rvCities.layoutManager = gridLayoutManager
+        with(binding) {
+            rvCities.adapter = adapter
+            rvCities.layoutManager = gridLayoutManager
+            swipeRefreshLayout.setOnRefreshListener {
+                binding.swipeRefreshLayout.isRefreshing = false
+            }
+            composeView.setContent {
+                AppCompatTheme {
+                    val data = listOf(
+                        Accommodation(AIRBNB_SAMPLE_IMAGE, "오늘 하루도 쉴 수 있는 숙소"),
+                        Accommodation(AIRBNB_SAMPLE_IMAGE2, "자연경관이 멋진 우기네 집"),
+                        Accommodation(AIRBNB_SAMPLE_IMAGE3, "경주에서 볼 수 있는 멋진 야경"),
+                        Accommodation(AIRBNB_SAMPLE_IMAGE, "오늘 하루도 쉴 수 있는 숙소"),
+                        Accommodation(AIRBNB_SAMPLE_IMAGE2, "자연경관이 멋진 우기네 집"),
+                        Accommodation(AIRBNB_SAMPLE_IMAGE3, "경주에서 볼 수 있는 멋진 야경")
+                    )
+                    AccommodationList(data)
+                }
+            }
+        }
     }
 
     private fun setupObserver() {
@@ -97,4 +101,11 @@ class HomeFragment : Fragment() {
             HomeFragmentDirections.actionHomeFragmentToSearchFragment(adapter.currentList.toTypedArray())
         findNavController().navigate(action)
     }
+
+    companion object {
+        private const val AIRBNB_SAMPLE_IMAGE = "https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q203_Luxe_ProvenceFR_Bedroom_1652_CandlesOut_R1.jpg?fit=2662,1776"
+        private const val AIRBNB_SAMPLE_IMAGE2 = "https://news.airbnb.com/wp-content/uploads/sites/4/2022/04/065.jpg?w=1000"
+        private const val AIRBNB_SAMPLE_IMAGE3 = "https://news.airbnb.com/wp-content/uploads/sites/4/2022/04/051.jpg?w=1000"
+    }
+
 }
