@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.visibility = View.GONE
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
+
     private fun makeRefreshLocation() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             getLastLocation()
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
+
     private fun requestLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -169,8 +169,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
