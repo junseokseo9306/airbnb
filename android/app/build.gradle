@@ -32,7 +32,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion "1.0.1"
+        kotlinCompilerExtensionVersion = "1.2.0-beta01"
     }
 
     buildTypes {

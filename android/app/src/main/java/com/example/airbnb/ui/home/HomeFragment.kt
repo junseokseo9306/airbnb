@@ -17,6 +17,7 @@ import com.example.airbnb.data.Image
 import com.example.airbnb.databinding.FragmentHomeBinding
 import com.example.airbnb.di.NetworkModule
 import com.example.airbnb.viewmodels.HomeViewModel
+import com.google.accompanist.appcompattheme.AppCompatTheme
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -43,6 +44,20 @@ class HomeFragment : Fragment() {
         setupViews()
         setupObserver()
         onTextClicked()
+        binding.composeView.setContent {
+            AppCompatTheme {
+                val data = listOf(
+                    Accommodation("AA", "BB"),
+                    Accommodation("AA", "CC"),
+                    Accommodation("AA", "DD"),
+                    Accommodation("AA", "EE"),
+                    Accommodation("AA", "FF"),
+                    Accommodation("AA", "GG")
+                )
+
+                AccommodationList(data)
+            }
+        }
     }
 
     private fun setupViews() {
