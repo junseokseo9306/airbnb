@@ -56,6 +56,8 @@ class HomeViewModel @Inject constructor(
     }
 
     //포스트맨 api의 longitude, latitude의 순서가 뒤바뀌어있
+
+    @OptIn(FlowPreview::class)
     private fun getTimeToCity(
         myLongitude: Double,
         myLatitude: Double,
@@ -63,24 +65,23 @@ class HomeViewModel @Inject constructor(
     ) {
         viewModelScope.launch {
             val start = System.currentTimeMillis()
-            for (index in cityList.indices) {
+            cityList.asFlow().flatMapMerge { city ->
                 delay(500)
                 tmapRepository.getTime(
                     TmapRequest(
                         myLongitude,
                         myLatitude,
-                        cityList[index].currentCoordinate.latitude,
-                        cityList[index].currentCoordinate.longitude
+                        city.currentCoordinate.latitude,
+                        city.currentCoordinate.longitude
                     )
-                ).buffer().onEach {
-                    Log.d("viewModel", it.totalMinute.toString())
-                    _cityInfo.setList(
-                        CityInfo(
-                            cityList[index],
-                            it.totalMinute
-                        )
+                )
+            }.collectIndexed { index, tmap ->
+                _cityInfo.setList(
+                    CityInfo(
+                        cityList[index],
+                        tmap.totalMinute
                     )
-                }.launchIn(this)
+                )
             }
             val end = System.currentTimeMillis()
             Log.d("viewModel", "${(end - start)} 초")
