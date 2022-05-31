@@ -44,29 +44,30 @@ class HomeFragment : Fragment() {
         setupViews()
         setupObserver()
         onTextClicked()
-        binding.composeView.setContent {
-            AppCompatTheme {
-                val data = listOf(
-                    Accommodation(AIRBNB_SAMPLE_IMAGE, "오늘 하루도 쉴 수 있는 숙소"),
-                    Accommodation(AIRBNB_SAMPLE_IMAGE2, "자연경관이 멋진 우기네 집"),
-                    Accommodation(AIRBNB_SAMPLE_IMAGE3, "경주에서 볼 수 있는 멋진 야경"),
-                    Accommodation(AIRBNB_SAMPLE_IMAGE, "오늘 하루도 쉴 수 있는 숙소"),
-                    Accommodation(AIRBNB_SAMPLE_IMAGE2, "자연경관이 멋진 우기네 집"),
-                    Accommodation(AIRBNB_SAMPLE_IMAGE3, "경주에서 볼 수 있는 멋진 야경")
-                )
-
-                AccommodationList(data)
-            }
-        }
     }
 
     private fun setupViews() {
         val gridLayoutManager =
             GridLayoutManager(this.context, 2, GridLayoutManager.HORIZONTAL, false)
-        binding.rvCities.adapter = adapter
-        binding.rvCities.layoutManager = gridLayoutManager
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            binding.swipeRefreshLayout.isRefreshing = false
+        with(binding) {
+            rvCities.adapter = adapter
+            rvCities.layoutManager = gridLayoutManager
+            swipeRefreshLayout.setOnRefreshListener {
+                binding.swipeRefreshLayout.isRefreshing = false
+            }
+            composeView.setContent {
+                AppCompatTheme {
+                    val data = listOf(
+                        Accommodation(AIRBNB_SAMPLE_IMAGE, "오늘 하루도 쉴 수 있는 숙소"),
+                        Accommodation(AIRBNB_SAMPLE_IMAGE2, "자연경관이 멋진 우기네 집"),
+                        Accommodation(AIRBNB_SAMPLE_IMAGE3, "경주에서 볼 수 있는 멋진 야경"),
+                        Accommodation(AIRBNB_SAMPLE_IMAGE, "오늘 하루도 쉴 수 있는 숙소"),
+                        Accommodation(AIRBNB_SAMPLE_IMAGE2, "자연경관이 멋진 우기네 집"),
+                        Accommodation(AIRBNB_SAMPLE_IMAGE3, "경주에서 볼 수 있는 멋진 야경")
+                    )
+                    AccommodationList(data)
+                }
+            }
         }
     }
 
