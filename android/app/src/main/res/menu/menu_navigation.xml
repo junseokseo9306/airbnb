@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search"/>
+
+    <item
+        android:id="@+id/navigation_wishList"
+        android:icon="@drawable/ic_vector_love"
+        android:title="@string/wish_list" />
+
+    <item
+        android:id="@+id/navigation_my_reservation"
+        android:icon="@drawable/ic_vector_personal"
+        android:title="@string/my_reservation"/>
+
+</menu>
