@@ -8,16 +8,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.airbnb.R
 import com.example.airbnb.databinding.FragmentSearchBinding
+import com.example.airbnb.ui.home.HomeAdapter
 
 class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
 
     private var isInputtedText = false
+
+    private val args: SearchFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,12 +47,17 @@ class SearchFragment : Fragment() {
         registerTextViewForTextChange()
         registerCloseButton()
         focusInputTextAndShowKeyboard()
+
+        val adapter = HomeAdapter { }
+        binding.cityRecyclerview.adapter = adapter
+        adapter.submitList(args.cityInfoList.toList())
     }
 
     private fun focusInputTextAndShowKeyboard() {
         binding.searchInputText.requestFocus()
 
-        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(binding.searchInputText, InputMethodManager.SHOW_IMPLICIT)
     }
 
@@ -65,9 +75,11 @@ class SearchFragment : Fragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 isInputtedText = if (s.isNullOrBlank()) {
                     binding.clearButton.setImageResource(R.drawable.ic_search)
+                    binding.nearTripText.isVisible = true
                     false
                 } else {
                     binding.clearButton.setImageResource(R.drawable.ic_clear)
+                    binding.nearTripText.isVisible = false
                     true
                 }
             }

@@ -1,7 +1,6 @@
 package com.example.airbnb.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,13 +13,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.airbnb.R
-import com.example.airbnb.data.CityInfo
 import com.example.airbnb.data.Image
 import com.example.airbnb.databinding.FragmentHomeBinding
 import com.example.airbnb.di.NetworkModule
 import com.example.airbnb.viewmodels.HomeViewModel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.zip
+import com.google.accompanist.appcompattheme.AppCompatTheme
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -50,29 +47,35 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupViews() {
-        val gridLayoutManager = GridLayoutManager(this.context, 2, GridLayoutManager.HORIZONTAL, false)
-        binding.rvCities.adapter = adapter
-        binding.rvCities.layoutManager = gridLayoutManager
+        val gridLayoutManager =
+            GridLayoutManager(this.context, 2, GridLayoutManager.HORIZONTAL, false)
+        with(binding) {
+            rvCities.adapter = adapter
+            rvCities.layoutManager = gridLayoutManager
+            swipeRefreshLayout.setOnRefreshListener {
+                binding.swipeRefreshLayout.isRefreshing = false
+            }
+            composeView.setContent {
+                AppCompatTheme {
+                    val data = listOf(
+                        Accommodation(AIRBNB_SAMPLE_IMAGE, "오늘 하루도 쉴 수 있는 숙소"),
+                        Accommodation(AIRBNB_SAMPLE_IMAGE2, "자연경관이 멋진 우기네 집"),
+                        Accommodation(AIRBNB_SAMPLE_IMAGE3, "경주에서 볼 수 있는 멋진 야경"),
+                        Accommodation(AIRBNB_SAMPLE_IMAGE, "오늘 하루도 쉴 수 있는 숙소"),
+                        Accommodation(AIRBNB_SAMPLE_IMAGE2, "자연경관이 멋진 우기네 집"),
+                        Accommodation(AIRBNB_SAMPLE_IMAGE3, "경주에서 볼 수 있는 멋진 야경")
+                    )
+                    AccommodationList(data)
+                }
+            }
+        }
     }
 
     private fun setupObserver() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                viewModel.homeContent.zip(viewModel.cityTime) { element1, element2 ->
-//                    Log.d("homeFragment", "element : ${element1.size}")
-//                    Log.d("homeFragment", "element : ${element2.size}")
-//                    val cityInfoList = mutableListOf<CityInfo>()
-//                    for(index in 1 until element1.size) {
-//                        cityInfoList.add(CityInfo(element1[index], element2[index]))
-//                    }
-//                    adapter.submitList(cityInfoList)
-//                }.collect()
-                viewModel.homeContent.collect {
-                    val cityInfoList = mutableListOf<CityInfo>()
-                    it.forEach { city ->
-                        cityInfoList.add(CityInfo(city, 30))
-                    }
-                    adapter.submitList(cityInfoList)
+                viewModel.cityInfo.collect {
+                    adapter.submitList(it)
                 }
             }
         }
@@ -94,6 +97,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun moveToSearchFragment() {
-        findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        val action =
+            HomeFragmentDirections.actionHomeFragmentToSearchFragment(adapter.currentList.toTypedArray())
+        findNavController().navigate(action)
     }
+
+    companion object {
+        private const val AIRBNB_SAMPLE_IMAGE = "https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q203_Luxe_ProvenceFR_Bedroom_1652_CandlesOut_R1.jpg?fit=2662,1776"
+        private const val AIRBNB_SAMPLE_IMAGE2 = "https://news.airbnb.com/wp-content/uploads/sites/4/2022/04/065.jpg?w=1000"
+        private const val AIRBNB_SAMPLE_IMAGE3 = "https://news.airbnb.com/wp-content/uploads/sites/4/2022/04/051.jpg?w=1000"
+    }
+
 }

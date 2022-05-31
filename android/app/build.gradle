@@ -6,6 +6,8 @@ plugins {
     id 'kotlinx-serialization'
 }
 
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 def apikeyPropertiesFile = rootProject.file("tmapkey.properties")
 def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
@@ -23,6 +25,14 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "TMAP_APP_KEY", apikeyProperties['TMAP_APP_KEY'])
+    }
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.2.0-beta01"
     }
 
     buildTypes {
@@ -89,4 +99,26 @@ dependencies {
     //swipeRefresh
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
+    //Compose
+    // Integration with activities
+    implementation 'androidx.activity:activity-compose:1.4.0'
+    // Compose Material Design
+    implementation 'androidx.compose.material:material:1.1.1'
+    // Animations
+    implementation 'androidx.compose.animation:animation:1.1.1'
+    // Tooling support (Previews, etc.)
+    implementation 'androidx.compose.ui:ui-tooling:1.1.1'
+    // Integration with ViewModels
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1'
+    // UI Tests
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.1.1'
+
+    // When using a MDC theme
+    implementation "com.google.android.material:compose-theme-adapter:1.1.10"
+
+    // When using a AppCompat theme
+    implementation "com.google.accompanist:accompanist-appcompat-theme:0.23.0"
+
+    //compose coil
+    implementation "io.coil-kt:coil-compose:2.1.0"
 }

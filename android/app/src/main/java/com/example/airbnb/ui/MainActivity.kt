@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         setupNav()
         requestPermission()
-        makeRefreshLocation()
+//        makeRefreshLocation()
         requestLocationUpdates()
         getLastLocation()
 
@@ -76,15 +76,6 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.visibility = View.GONE
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    private fun makeRefreshLocation() {
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            getLastLocation()
-            binding.swipeRefreshLayout.isRefreshing = false
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun requestLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -127,7 +118,7 @@ class MainActivity : AppCompatActivity() {
         if (location != null) {
             homeViewModel.setMyLocation(location.latitude, location.longitude)
         }
-        Log.d("Activity", location?.latitude.toString())
+        Log.d("Activity", location.toString())
     }
 
     private fun checkPermissions(): Boolean {
@@ -169,8 +160,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -187,7 +176,7 @@ class MainActivity : AppCompatActivity() {
                     Snackbar.make(
                         binding.root,
                         getString(R.string.permission_rationale),
-                        Snackbar.LENGTH_INDEFINITE
+                        Snackbar.LENGTH_LONG
                     )
                         .setAction(getString(R.string.settings)) {
                             val intent = Intent()

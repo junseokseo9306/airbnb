@@ -4,12 +4,15 @@ import com.example.airbnb.datasource.TmapDataSource
 import com.example.airbnb.dto.toTmap
 import com.example.airbnb.model.Tmap
 import com.example.airbnb.network.TmapRequest
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class TmapRepositoryImpl @Inject constructor(
     private val tmapDataSource: TmapDataSource
 ) : TmapRepository {
-    override suspend fun getTime(tmapRequest: TmapRequest): Tmap {
-        return tmapDataSource.getTime(tmapRequest).toTmap()
-    }
+    override fun getTime(tmapRequest: TmapRequest): Flow<Tmap> =
+        tmapDataSource.getTime(tmapRequest).map { tampDto ->
+            tampDto.toTmap()
+        }
 }
