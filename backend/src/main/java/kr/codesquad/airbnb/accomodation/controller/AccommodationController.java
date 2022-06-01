@@ -1,7 +1,8 @@
-package kr.codesquad.airbnb.accomodation.web;
+package kr.codesquad.airbnb.accomodation.controller;
 
 import kr.codesquad.airbnb.accomodation.dto.AccommodationSearchRequest;
 import kr.codesquad.airbnb.accomodation.dto.AccommodationsResponse;
+import kr.codesquad.airbnb.accomodation.service.AccommodationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

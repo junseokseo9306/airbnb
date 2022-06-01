@@ -1,4 +1,4 @@
-package kr.codesquad.airbnb.accomodation.web;
+package kr.codesquad.airbnb.accomodation.service;
 
 import kr.codesquad.airbnb.accomodation.domain.AccommodationRepository;
 import kr.codesquad.airbnb.accomodation.dto.AccommodationSearchRequest;
