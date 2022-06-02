@@ -118,7 +118,7 @@
                     android:insetRight="0dp"
                     android:insetBottom="0dp"
                     app:icon="@drawable/ic_baseline_check_24"
-                    app:iconTint="@color/primaryColor" />
+                    app:iconTint="@color/grey4" />
 
                 <include
                     layout="@layout/mtrl_picker_header_toggle"

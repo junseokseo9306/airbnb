@@ -54,6 +54,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.R;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.InsetDialogOnTouchListener;
 import com.google.android.material.internal.CheckableImageButton;
 import com.google.android.material.internal.EdgeToEdgeUtils;
@@ -122,7 +123,7 @@ public final class MaterialDatePicker<S> extends DialogFragment {
     private CheckableImageButton headerToggleButton;
     @Nullable
     private MaterialShapeDrawable background;
-    private Button confirmButton;
+    private MaterialButton confirmButton;
     private boolean edgeToEdgeEnabled;
 
     /**
@@ -469,7 +470,15 @@ public final class MaterialDatePicker<S> extends DialogFragment {
                     @Override
                     public void onSelectionChanged(S selection) {
                         updateHeader();
-                        confirmButton.setEnabled(getDateSelector().isSelectionComplete());
+
+                        boolean isSelectionComplete = getDateSelector().isSelectionComplete();
+                        if (isSelectionComplete) {
+                            confirmButton.setIconTintResource(com.example.airbnb.R.color.primaryColor);
+                        } else {
+                            confirmButton.setIconTintResource(com.example.airbnb.R.color.grey4);
+                        }
+
+                        confirmButton.setEnabled(isSelectionComplete);
                     }
 
                     @Override
