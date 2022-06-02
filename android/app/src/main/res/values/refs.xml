@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <item name="mtrl_picker_fullscreen" type="layout" tools:override="true">@layout/calendar_layout</item>
+    <item name="mtrl_calendar_month_labeled" type="layout" tools:override="true">@layout/custom_month_labeled</item>
+</resources>

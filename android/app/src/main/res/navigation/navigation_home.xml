@@ -28,5 +28,12 @@
             app:destination="@id/searchFragment"
             app:enterAnim="@anim/nav_default_pop_enter_anim"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_materialDatePicker"
+            app:destination="@id/materialDatePicker" />
     </fragment>
+    <dialog
+        android:id="@+id/materialDatePicker"
+        android:name="com.example.airbnb.ui.custom.datepicker.MaterialDatePicker"
+        android:label="MaterialDatePicker" />
 </navigation>
