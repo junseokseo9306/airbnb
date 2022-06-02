@@ -3,8 +3,10 @@ package kr.codesquad.airbnb.accomodation.domain;
 import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import lombok.Getter;
 
 @Embeddable
+@Getter
 public class AccommodationInfo {
 
     private String name;
