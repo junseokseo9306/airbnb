@@ -35,4 +35,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+.gitignore
+
+### application.properties ###
 application-mysql.properties
