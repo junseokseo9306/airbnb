@@ -1,5 +1,6 @@
 package kr.codesquad.airbnb.accomodation.domain;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import javax.persistence.Column;
@@ -10,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import kr.codesquad.airbnb.accomodation.dto.AccommodationResponse;
+import kr.codesquad.airbnb.reservation.domain.Reservation;
+import kr.codesquad.airbnb.reservation.domain.User;
+import kr.codesquad.airbnb.reservation.dto.ReservationRequest;
 import lombok.Getter;
 
 @Entity(name = "accommodation")
@@ -44,6 +48,17 @@ public class Accommodation {
             .isWish(false) //todo: User도메인 개발 후 진행
             .isSuperHost(host.isSuperHost())
             .thumbnail(accommodationImages.get(0).getImageUrl())
+            .build();
+    }
+
+    public Reservation createReservation(User user, ReservationRequest reservationRequest) {
+        return Reservation.builder()
+            .accommodation(this)
+            .user(user)
+            .checkIn(LocalDate.parse(reservationRequest.getCheckIn()))
+            .checkOut(LocalDate.parse(reservationRequest.getCheckOut()))
+            .totalPrice(reservationRequest.getTotalPrice())
+            .guests(reservationRequest.getGuests())
             .build();
     }
 
