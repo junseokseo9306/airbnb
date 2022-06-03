@@ -10,25 +10,13 @@ import lombok.Getter;
 public class AccommodationResponse {
 
     private final Long id;
-    private final String hostName;
-    private final String hostImage;
-    private final boolean isSuperHost;
-    private final String accommodationName;
-    private final String description;
+    private final String accomName;
     private final BigDecimal price;
-    private final String address;
-    private final String checkInTime;
-    private final String checkOutTime;
-    private final int occupancy;
-    private final String accommodationType;
-    private final BigDecimal cleaningFee;
-    private final int bedCount;
-    private final int bathroomCount;
-    private final int reviewCount;
+    private final BigDecimal totalPrice;
     private final String rating;
-    private final boolean wifi;
-    private final boolean hairDryer;
-    private final List<String> accommodationImages;
-
+    private final int reviews;
+    private final boolean isWish;
+    private final boolean isSuperHost;
+    private final String thumbnail;
 
 }
