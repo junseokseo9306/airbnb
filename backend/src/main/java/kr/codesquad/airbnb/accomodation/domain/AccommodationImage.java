@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Entity(name = "accommodation_image")
 @Getter
-public class AccommodationImage {
+public class AccommodationImage implements Comparable<AccommodationImage> {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,4 +26,8 @@ public class AccommodationImage {
     @Column(name = "image_seq")
     private Integer imageSeq;
 
+    @Override
+    public int compareTo(AccommodationImage o) {
+        return imageSeq - o.getImageSeq();
+    }
 }

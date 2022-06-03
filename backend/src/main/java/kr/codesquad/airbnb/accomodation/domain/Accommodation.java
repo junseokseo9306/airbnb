@@ -2,6 +2,7 @@ package kr.codesquad.airbnb.accomodation.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -32,6 +33,8 @@ public class Accommodation {
     private List<AccommodationImage> accommodationImages;
 
     public AccommodationResponse convertToAccommodationResponse() {
+        Collections.sort(accommodationImages);
+
         return AccommodationResponse.builder()
             .id(getAccommodationId())
             .hostName(host.getName())
@@ -52,6 +55,8 @@ public class Accommodation {
             .rating(String.valueOf(report.getRating()))
             .wifi(amenity.isWifi())
             .hair_dryer(amenity.isHairDryer())
+            .accommodationImages(accommodationImages.stream().map(AccommodationImage::getImageUrl).collect(
+                Collectors.toList()))
             .build();
     }
 
