@@ -1,6 +1,8 @@
 package kr.codesquad.airbnb.accomodation.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.math.BigDecimal;
+import java.time.LocalTime;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
@@ -15,8 +17,12 @@ public class AccommodationInfo {
     private String description;
     private BigDecimal price;
     private String address;
-    private String checkInTime;
-    private String checkOutTime;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    private LocalTime checkInTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    private LocalTime checkOutTime;
+
     private Integer occupancy;
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
