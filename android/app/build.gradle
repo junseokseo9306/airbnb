@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
     id 'kotlinx-serialization'
 }
@@ -121,4 +122,8 @@ dependencies {
 
     //compose coil
     implementation "io.coil-kt:coil-compose:2.1.0"
+
+    //stfalcon-pricerangebar
+    implementation 'com.github.stfalcon-studio:StfalconPriceRangeBar-android:v1.5'
+
 }
