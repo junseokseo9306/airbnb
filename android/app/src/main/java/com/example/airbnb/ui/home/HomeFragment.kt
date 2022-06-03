@@ -16,6 +16,9 @@ import com.example.airbnb.R
 import com.example.airbnb.data.Image
 import com.example.airbnb.databinding.FragmentHomeBinding
 import com.example.airbnb.di.NetworkModule
+import com.example.airbnb.ui.custom.datepicker.CalendarConstraints
+import com.example.airbnb.ui.custom.datepicker.DateValidatorPointForward
+import com.example.airbnb.ui.custom.datepicker.MaterialDatePicker
 import com.example.airbnb.viewmodels.HomeViewModel
 import com.google.accompanist.appcompattheme.AppCompatTheme
 import kotlinx.coroutines.launch
@@ -87,7 +90,20 @@ class HomeFragment : Fragment() {
                 moveToSearchFragment()
             }
             ibSearchButton.setOnClickListener {
-                moveToSearchFragment()
+//                moveToSearchFragment()
+
+                val constraintsBuilder =
+                    CalendarConstraints.Builder()
+                        .setValidator(DateValidatorPointForward.now())
+
+                val dateRangePicker =
+                    MaterialDatePicker.Builder.dateRangePicker()
+                        .setTitleText("Select dates")
+                        .setCalendarConstraints(constraintsBuilder.build())
+                        .setTheme(R.style.CalendarTheme)
+                        .build()
+
+                dateRangePicker.show(childFragmentManager, "CALENDAR")
             }
         }
     }
