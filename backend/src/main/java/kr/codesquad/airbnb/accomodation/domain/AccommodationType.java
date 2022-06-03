@@ -1,8 +1,10 @@
 package kr.codesquad.airbnb.accomodation.domain;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@Getter
 public enum AccommodationType {
 
     ONE_ROOM("원룸"),
