@@ -1,9 +1,22 @@
 package com.example.airbnb.ui.home
 
+import android.Manifest
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.LocationListener
+import android.location.LocationManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -12,8 +25,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.airbnb.BuildConfig
 import com.example.airbnb.R
 import com.example.airbnb.adapters.CityItemAdapter
+import com.example.airbnb.common.hasPermission
 import com.example.airbnb.data.Image
 import com.example.airbnb.databinding.FragmentHomeBinding
 import com.example.airbnb.di.NetworkModule
@@ -22,6 +37,7 @@ import com.example.airbnb.ui.custom.datepicker.DateValidatorPointForward
 import com.example.airbnb.ui.custom.datepicker.MaterialDatePicker
 import com.example.airbnb.viewmodels.HomeViewModel
 import com.google.accompanist.appcompattheme.AppCompatTheme
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -91,8 +107,6 @@ class HomeFragment : Fragment() {
                 moveToSearchFragment()
             }
             ibSearchButton.setOnClickListener {
-//                moveToSearchFragment()
-
                 val constraintsBuilder =
                     CalendarConstraints.Builder()
                         .setValidator(DateValidatorPointForward.now())

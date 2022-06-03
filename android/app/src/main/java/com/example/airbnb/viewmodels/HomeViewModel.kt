@@ -68,7 +68,6 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-
     //helper function
     fun setMyLocation(latitude: Double, longitude: Double) {
         _myLatitude.value = latitude
