@@ -17,8 +17,6 @@ public class ReservationResponse {
     private final String name;
     private final LocalDateTime checkIn;
     private final LocalDateTime checkOut;
-    private final String checkInTime;
-    private final String checkOutTime;
     private final String host;
     private final String accommodationType;
     private final Integer guests;
