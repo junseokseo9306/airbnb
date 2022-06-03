@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.Getter;
 
-@Entity(name = "accommodation_images")
+@Entity(name = "accommodation_image")
 @Getter
 public class AccommodationImage {
 
@@ -17,7 +17,7 @@ public class AccommodationImage {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "accommodation_id")
     private Accommodation accommodation;
 
     @Column(name = "image_url")
