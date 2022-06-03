@@ -55,8 +55,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    //포스트맨 api의 longitude, latitude의 순서가 뒤바뀌어있
-
+    //포스트맨 api의 longitude, latitude의 순서가 뒤바뀌어있다.
     @OptIn(FlowPreview::class)
     private fun getTimeToCity(
         myLongitude: Double,
@@ -87,7 +86,6 @@ class HomeViewModel @Inject constructor(
             Log.d("viewModel", "${(end - start)} 초")
         }
     }
-
 
     //helper function
     fun setMyLocation(latitude: Double, longitude: Double) {

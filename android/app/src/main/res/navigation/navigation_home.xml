@@ -28,5 +28,12 @@
             app:destination="@id/searchFragment"
             app:enterAnim="@anim/nav_default_pop_enter_anim"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_priceBar"
+            app:destination="@id/priceBar" />
     </fragment>
+    <fragment
+        android:id="@+id/priceBar"
+        android:name="com.example.airbnb.ui.pricebar.PriceBar"
+        android:label="PriceBar" />
 </navigation>

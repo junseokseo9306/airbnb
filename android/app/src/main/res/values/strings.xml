@@ -12,4 +12,6 @@
     <string name="permission_rationale">Permission was denied, but is needed for core function...</string>
     <string name="ok">ok</string>
     <string name="from_time">분 거리</string>
+    <string name="skip_string">건너뛰기</string>
+    <string name="test1">1000</string>
 </resources>
