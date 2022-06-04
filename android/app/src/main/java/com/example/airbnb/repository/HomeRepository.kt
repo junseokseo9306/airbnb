@@ -5,6 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface HomeRepository {
 
-    suspend fun loadHomeContents(): Flow<List<City>>
-
+    suspend fun loadHomeContents(): List<City>
 }

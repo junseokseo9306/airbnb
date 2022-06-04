@@ -12,8 +12,6 @@ import javax.inject.Singleton
 class HomeRepositoryImpl @Inject constructor(private val dataSource: HomeDataSource) :
     HomeRepository {
 
-    override suspend fun loadHomeContents(): Flow<List<City>> =
-        dataSource.getHomeContents().map { homeContentDTO ->
-            homeContentDTO.toCity()
-        }
+    override suspend fun loadHomeContents(): List<City> =
+        dataSource.getHomeContents().toCity()
 }
