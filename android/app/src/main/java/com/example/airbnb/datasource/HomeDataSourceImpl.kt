@@ -9,7 +9,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class HomeDataImpl @Inject constructor(private val api: HomeApi): HomeDataSource {
+class HomeDataSourceImpl @Inject constructor(private val api: HomeApi): HomeDataSource {
 
     override suspend fun getHomeContents(): Flow<CityDto> {
         val result = api.getHomeContents()
