@@ -12,22 +12,22 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class HomeDataModule {
+abstract class HomeDataSourceModule {
 
     @Singleton
     @Binds
-    abstract fun bindHomeData(
+    abstract fun bindHomeDataSource(
         homeDataSourceImpl: HomeDataSourceImpl
     ): HomeDataSource
 }
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class TmapDataModule {
+abstract class TmapDataSourceModule {
 
     @Singleton
     @Binds
-    abstract fun bindTmapData(
+    abstract fun bindTmapDataSource(
         tmapDataSourceImpl: TmapDataSourceImpl
     ): TmapDataSource
 }
