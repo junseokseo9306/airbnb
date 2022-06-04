@@ -21,18 +21,9 @@ class HomeViewModel @Inject constructor(
     private val tmapRepository: TmapRepository
 ) : ViewModel() {
 
-    private val _cityTime: MutableStateFlow<MutableList<Int>> = MutableStateFlow(mutableListOf())
-    val cityTime = _cityTime.asStateFlow()
-
     private val _myLongitude: MutableStateFlow<Double> = MutableStateFlow(0.0)
-    val myLongitude = _myLongitude.asStateFlow()
 
     private val _myLatitude: MutableStateFlow<Double> = MutableStateFlow(0.0)
-    val myLatitude = _myLatitude.asStateFlow()
-
-    private val _citiesCoord: MutableStateFlow<List<City.Coordinate>> = MutableStateFlow(
-        mutableListOf()
-    )
 
     private val _cityInfo: MutableStateFlow<MutableList<CityInfo>> =
         MutableStateFlow(mutableListOf())
@@ -41,8 +32,8 @@ class HomeViewModel @Inject constructor(
     fun loadContents() {
         viewModelScope.launch {
             val cityList = homeRepository.loadHomeContents()
-            getTimeToCity(myLongitude.value, myLatitude.value, cityList)
-            Log.d("viewModel", "mylongitude ${myLongitude.value} my latitude ${myLatitude.value}")
+            getTimeToCity(_myLongitude.value, _myLatitude.value, cityList)
+            Log.d("viewModel", "mylongitude ${_myLongitude.value} my latitude ${_myLatitude.value}")
         }
     }
 
