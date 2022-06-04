@@ -5,6 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface HomeDataSource {
 
-    suspend fun getHomeContents(): Flow<CityDto>
-
+    suspend fun getHomeContents(): CityDto
 }

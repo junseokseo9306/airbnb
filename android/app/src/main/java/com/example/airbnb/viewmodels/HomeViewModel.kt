@@ -21,10 +21,6 @@ class HomeViewModel @Inject constructor(
     private val tmapRepository: TmapRepository
 ) : ViewModel() {
 
-    private val _homeContents: MutableStateFlow<MutableList<City>> =
-        MutableStateFlow(mutableListOf())
-    val homeContent = _homeContents.asStateFlow()
-
     private val _cityTime: MutableStateFlow<MutableList<Int>> = MutableStateFlow(mutableListOf())
     val cityTime = _cityTime.asStateFlow()
 
@@ -37,7 +33,6 @@ class HomeViewModel @Inject constructor(
     private val _citiesCoord: MutableStateFlow<List<City.Coordinate>> = MutableStateFlow(
         mutableListOf()
     )
-    val citiesCoord = _citiesCoord.asStateFlow()
 
     private val _cityInfo: MutableStateFlow<MutableList<CityInfo>> =
         MutableStateFlow(mutableListOf())
@@ -45,17 +40,11 @@ class HomeViewModel @Inject constructor(
 
     fun loadContents() {
         viewModelScope.launch {
-
-            homeRepository.loadHomeContents().onEach { cities ->
-                _homeContents.value = cities.toMutableList()
-            }.launchIn(this)
-
-            getTimeToCity(myLongitude.value, myLatitude.value, homeContent.value)
+            val cityList = homeRepository.loadHomeContents()
+            getTimeToCity(myLongitude.value, myLatitude.value, cityList)
             Log.d("viewModel", "mylongitude ${myLongitude.value} my latitude ${myLatitude.value}")
         }
     }
-
-    //포스트맨 api의 longitude, latitude의 순서가 뒤바뀌어있
 
     @OptIn(FlowPreview::class)
     private fun getTimeToCity(

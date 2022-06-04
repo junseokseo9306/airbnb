@@ -11,10 +11,7 @@ import javax.inject.Singleton
 @Singleton
 class HomeDataSourceImpl @Inject constructor(private val api: AirbnbApi): HomeDataSource {
 
-    override suspend fun getHomeContents(): Flow<CityDto> {
-        val result = api.getHomeContents()
-        Log.d("datasource", result.cities?.size.toString())
-
-        return flow { emit(result) }
+    override suspend fun getHomeContents(): CityDto {
+        return api.getHomeContents()
     }
 }
