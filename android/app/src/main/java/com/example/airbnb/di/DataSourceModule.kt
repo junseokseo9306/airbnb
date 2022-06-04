@@ -1,6 +1,6 @@
 package com.example.airbnb.di
 
-import com.example.airbnb.datasource.HomeDataImpl
+import com.example.airbnb.datasource.HomeDataSourceImpl
 import com.example.airbnb.datasource.HomeDataSource
 import com.example.airbnb.datasource.TmapDataSource
 import com.example.airbnb.datasource.TmapDataSourceImpl
@@ -17,7 +17,7 @@ abstract class HomeDataModule {
     @Singleton
     @Binds
     abstract fun bindHomeData(
-        homeDataImpl: HomeDataImpl
+        homeDataSourceImpl: HomeDataSourceImpl
     ): HomeDataSource
 }
 
