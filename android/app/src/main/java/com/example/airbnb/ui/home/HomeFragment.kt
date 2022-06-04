@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.airbnb.R
+import com.example.airbnb.adapters.CityItemAdapter
 import com.example.airbnb.data.Image
 import com.example.airbnb.databinding.FragmentHomeBinding
 import com.example.airbnb.di.NetworkModule
@@ -27,7 +28,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by activityViewModels()
-    private val adapter = HomeAdapter(this::onItemClicked)
+    private val adapter = CityItemAdapter(this::onItemClicked)
 
     override fun onCreateView(
         inflater: LayoutInflater,

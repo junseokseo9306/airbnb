@@ -14,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.airbnb.R
 import com.example.airbnb.databinding.FragmentSearchBinding
-import com.example.airbnb.ui.home.HomeAdapter
+import com.example.airbnb.adapters.CityItemAdapter
 
 class SearchFragment : Fragment() {
 
@@ -48,7 +48,7 @@ class SearchFragment : Fragment() {
         registerCloseButton()
         focusInputTextAndShowKeyboard()
 
-        val adapter = HomeAdapter { }
+        val adapter = CityItemAdapter { }
         binding.cityRecyclerview.adapter = adapter
         adapter.submitList(args.cityInfoList.toList())
     }
