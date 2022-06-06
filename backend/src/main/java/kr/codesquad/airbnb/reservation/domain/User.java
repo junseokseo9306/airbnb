@@ -10,10 +10,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(length = 50)
-    private String name;
+    private String userId;
     @Column(length = 50)
-    private String publicEmail;
-    private String privateEmail;
+    private String name;
     @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;
 
@@ -21,11 +20,10 @@ public class User {
 
     }
 
-    public User(Long id, String name, String publicEmail, String privateEmail, List<Reservation> reservations) {
+    public User(Long id, String userId, String name, List<Reservation> reservations) {
         this.id = id;
+        this.userId = userId;
         this.name = name;
-        this.publicEmail = publicEmail;
-        this.privateEmail = privateEmail;
         this.reservations = reservations;
     }
 }
