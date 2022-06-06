@@ -1,6 +1,7 @@
 package com.example.airbnb.ui.home
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -138,5 +139,4 @@ class HomeFragment : Fragment() {
         private const val AIRBNB_SAMPLE_IMAGE2 = "https://news.airbnb.com/wp-content/uploads/sites/4/2022/04/065.jpg?w=1000"
         private const val AIRBNB_SAMPLE_IMAGE3 = "https://news.airbnb.com/wp-content/uploads/sites/4/2022/04/051.jpg?w=1000"
     }
-
 }

@@ -9,6 +9,7 @@ import com.example.airbnb.network.TmapRequest
 import com.example.airbnb.repository.HomeRepository
 import com.example.airbnb.repository.TmapRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -29,6 +30,10 @@ class HomeViewModel @Inject constructor(
         MutableStateFlow(mutableListOf())
     val cityInfo = _cityInfo.asStateFlow()
 
+    init {
+        setMyLocation(DEFAULT_LOCATION_LATITUDE, DEFAULT_LOCATION_LONGITUDE)
+    }
+
     fun loadContents() {
         viewModelScope.launch {
             val cityList = homeRepository.loadHomeContents()
@@ -45,6 +50,7 @@ class HomeViewModel @Inject constructor(
     ) {
         viewModelScope.launch {
             val start = System.currentTimeMillis()
+
             cityList.asFlow().flatMapMerge { city ->
                 delay(500)
                 tmapRepository.getTime(
@@ -55,7 +61,7 @@ class HomeViewModel @Inject constructor(
                         city.currentCoordinate.longitude
                     )
                 )
-            }.collectIndexed { index, tmap ->
+            }.buffer().collectIndexed { index, tmap ->
                 _cityInfo.setList(
                     CityInfo(
                         cityList[index],
@@ -75,6 +81,9 @@ class HomeViewModel @Inject constructor(
     }
 
     companion object {
+        private const val DEFAULT_LOCATION_LATITUDE = 37.37599
+        private const val DEFAULT_LOCATION_LONGITUDE = 127.132685
+
         private fun <E> MutableStateFlow<MutableList<E>>.setList(element: E?) {
             val tempList: MutableList<E> = mutableListOf()
             this.value.let { tempList.addAll(it) }
