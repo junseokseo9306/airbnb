@@ -1,6 +1,7 @@
 package com.example.airbnb.ui.home
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -46,6 +47,7 @@ class HomeFragment : Fragment() {
     private val adapter = HomeAdapter(this::onItemClicked)
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
+    private lateinit var activityContext: Context
 
     @RequiresApi(Build.VERSION_CODES.Q)
     private val locationPermissions = arrayOf(
@@ -70,6 +72,11 @@ class HomeFragment : Fragment() {
             .show()
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activityContext = context
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -90,8 +97,8 @@ class HomeFragment : Fragment() {
         setupObserver()
         onTextClicked()
         requestPermissionResult()
-        requestLocationUpdates()
-        getLastLocation()
+//        requestLocationUpdates()
+//        getLastLocation()
     }
 
     private fun setupViews() {
@@ -169,10 +176,11 @@ class HomeFragment : Fragment() {
         val requestPermissions =
             registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
                 val responsePermissions = permissions.entries.filter {
-                    it.key == Manifest.permission.ACCESS_FINE_LOCATION || it.key == Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                    it.key == Manifest.permission.ACCESS_FINE_LOCATION ||
+                            it.key == Manifest.permission.ACCESS_COARSE_LOCATION
                 }
                 Log.d("HomeFragment", responsePermissions.size.toString())
-                if (responsePermissions.filter { it.value }.size == REQUIRE_LOCATION_PERMISSIONS) {
+                if (responsePermissions.filter { it.value }.size > DEFAULT_PERMISSION_GRANTED_COUNTS) {
                     Log.d("HomeFragment", "permission granted")
                     requestLocationUpdates()
                     getLastLocation()
@@ -196,66 +204,44 @@ class HomeFragment : Fragment() {
 
     }
 
+    @SuppressLint("MissingPermission")
     private fun requestLocationUpdates() {
-        if (context?.hasPermission(Manifest.permission.ACCESS_FINE_LOCATION) != true && context?.hasPermission(
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION
-            ) != true
+        if (activityContext.hasPermission(Manifest.permission.ACCESS_FINE_LOCATION) ||
+            activityContext.hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
         ) {
-            return
-        }
-        locationManager =
-            requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            locationManager =
+                requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-        locationListener = LocationListener { location ->
-            val latitude = location.latitude
-            val longitude = location.longitude
-            Log.d("HomeFragment", "latitude : $latitude, longitude : $longitude")
-        }
+            locationListener = LocationListener { location ->
+                val latitude = location.latitude
+                val longitude = location.longitude
+                Log.d("HomeFragment", "latitude : $latitude, longitude : $longitude")
+            }
 
-        if (ActivityCompat.checkSelfPermission(
-                requireActivity().applicationContext,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireActivity().applicationContext,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return
+            locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER,
+                10000L,
+                10.0F,
+                locationListener
+            )
         }
-        locationManager.requestLocationUpdates(
-            LocationManager.GPS_PROVIDER,
-            10000L,
-            10.0F,
-            locationListener
-        )
-
     }
 
+    @SuppressLint("MissingPermission")
     private fun getLastLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                requireActivity().applicationContext,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireActivity().applicationContext,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
+        if (activityContext.hasPermission(Manifest.permission.ACCESS_FINE_LOCATION) ||
+            activityContext.hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
         ) {
-            return
+            val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+            if (location != null) {
+                viewModel.setMyLocation(location.latitude, location.longitude)
+            }
+            Log.d("HomeFragment", location.toString())
         }
-        val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-        if (location != null) {
-            viewModel.setMyLocation(location.latitude, location.longitude)
-        } else {
-            viewModel.setMyLocation(DEFAULT_LOCATION_LATITUDE, DEFAULT_LOCATION_LONGITUDE)
-        }
-        Log.d("HomeFragment", location.toString())
     }
-
 
     companion object {
-        private const val REQUIRE_LOCATION_PERMISSIONS = 2
-        private const val DEFAULT_LOCATION_LATITUDE = 37.37599
-        private const val DEFAULT_LOCATION_LONGITUDE = 127.132685
+        private const val DEFAULT_PERMISSION_GRANTED_COUNTS = 0
 
         private const val AIRBNB_SAMPLE_IMAGE =
             "https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q203_Luxe_ProvenceFR_Bedroom_1652_CandlesOut_R1.jpg?fit=2662,1776"
