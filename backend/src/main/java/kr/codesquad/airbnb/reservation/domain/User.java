@@ -12,8 +12,20 @@ public class User {
     @Column(length = 50)
     private String name;
     @Column(length = 50)
-    private String email;
+    private String publicEmail;
+    private String privateEmail;
     @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;
 
+    public User() {
+
+    }
+
+    public User(Long id, String name, String publicEmail, String privateEmail, List<Reservation> reservations) {
+        this.id = id;
+        this.name = name;
+        this.publicEmail = publicEmail;
+        this.privateEmail = privateEmail;
+        this.reservations = reservations;
+    }
 }
