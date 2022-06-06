@@ -25,19 +25,20 @@ class CustomAppBar(context: Context, attrs: AttributeSet?) :
         getAttrs(attrs)
     }
 
-    @SuppressLint("Recycle")
+
     private fun getAttrs(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomAppBar)
 
-        setTitleText(typedArray.getString(R.styleable.CustomAppBar_titleText))
-        setBodyText(typedArray.getString(R.styleable.CustomAppBar_bodyText))
+        typedArray.getString(R.styleable.CustomAppBar_titleText)?.let { setTitleText(it) }
+
+        typedArray.recycle()
     }
 
-    private fun setTitleText(titleText: String?) {
+    private fun setTitleText(titleText: String) {
         binding.tvPriceRange.text = titleText
     }
 
-    private fun setBodyText(bodyText: String?) {
+    fun setBodyText(bodyText: String) {
         binding.tvPrice.text = bodyText
     }
 

@@ -33,52 +33,49 @@ class PriceBar() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val roomPrice = mutableListOf<Int>()
+        roomPrice.add(10000)
+        roomPrice.add(10000)
+        roomPrice.add(10000)
+        roomPrice.add(40000)
+        roomPrice.add(50000)
+        roomPrice.add(50000)
+        roomPrice.add(60000)
+        roomPrice.add(60000)
+        roomPrice.add(100000)
+        roomPrice.add(10000)
+        roomPrice.add(10000)
+        roomPrice.add(10000)
+        roomPrice.add(40000)
+
         val barEntrys = ArrayList<BarEntry>()
 
-        barEntrys.add(BarEntry(1.0f, 50.0f))
-        barEntrys.add(BarEntry(2.0f, 70.0f))
-        barEntrys.add(BarEntry(3.0f, 100.0f))
-        barEntrys.add(BarEntry(4.0f, 200.0f))
-        barEntrys.add(BarEntry(5.0f, 50.0f))
-        barEntrys.add(BarEntry(6.0f, 50.0f))
-        barEntrys.add(BarEntry(7.0f, 50.0f))
-        barEntrys.add(BarEntry(8.0f, 50.0f))
-        barEntrys.add(BarEntry(9.0f, 50.0f))
-        barEntrys.add(BarEntry(10.0f, 50.0f))
-        barEntrys.add(BarEntry(11.0f, 10.0f))
-        barEntrys.add(BarEntry(12.0f, 10.0f))
-        barEntrys.add(BarEntry(13.0f, 10.0f))
-        barEntrys.add(BarEntry(14.0f, 10.0f))
-        barEntrys.add(BarEntry(15.0f, 10.0f))
-        barEntrys.add(BarEntry(16.0f, 10.0f))
-        barEntrys.add(BarEntry(17.0f, 10.0f))
-        barEntrys.add(BarEntry(18.0f, 10.0f))
+        var initialX = 0f
+        roomPrice.forEach { price ->
+            barEntrys.add(BarEntry(initialX, INITIAL_VALUE))
+            barEntrys.add(BarEntry(initialX++, price.div(1000).toFloat()))
+            barEntrys.add(BarEntry(initialX, price.div(1000).toFloat()))
+            barEntrys.add(BarEntry(initialX++, INITIAL_VALUE))
+        }
 
-        var rightValue = 0
-        var leftValue = 0
         val priceRangeStringBuilder = StringBuilder("")
         with(binding) {
             stfRangeBar.setEntries(barEntrys)
-            stfRangeBar.onRightPinChanged = { rightPinIndex, rightPinValueString ->
-                rightValue = rightPinIndex
-                Log.d(
-                    "PriceBar",
-                    "index: $rightPinIndex, rightpin: $rightPinValueString value ${barEntrys[rightValue].y}"
-                )
+            stfRangeBar.onRangeChanged = { leftPinValue, rightPinValue ->
+                val minPrice = if (leftPinValue == "0") "1" else leftPinValue
+                priceRangeStringBuilder.append(minPrice)
+                priceRangeStringBuilder.append(",000")
+                priceRangeStringBuilder.append(" - ")
+                priceRangeStringBuilder.append(rightPinValue)
+                priceRangeStringBuilder.append(",000")
+                priceRangeStringBuilder.append(" + ")
+                priceRange = PriceRange(priceRangeStringBuilder.toString())
+                priceRangeStringBuilder.clear()
             }
-            stfRangeBar.onLeftPinChanged = { leftPinIndex, leftPinValueString ->
-                leftValue = leftPinIndex
-                Log.d(
-                    "PriceBar",
-                    "index: $leftPinIndex, rightpin: $leftPinValueString value: ${barEntrys[leftValue].y}"
-                )
-            }
-            priceRangeStringBuilder.append(leftValue)
-            priceRangeStringBuilder.append(rightValue)
-            priceRange = PriceRange(priceRangeStringBuilder.toString())
         }
-
-
     }
 
+    companion object {
+        private const val INITIAL_VALUE = 0f
+    }
 }
