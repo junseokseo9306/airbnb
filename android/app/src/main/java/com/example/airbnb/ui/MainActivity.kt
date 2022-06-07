@@ -21,19 +21,13 @@ private const val PERMISSION_REQUEST_CODE = 100
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val homeViewModel: HomeViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
-    private lateinit var locationManager: LocationManager
-    private lateinit var locationListener: LocationListener
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setContentView(binding.root)
-
-        homeViewModel.loadContents()
 
         setupNav()
     }
