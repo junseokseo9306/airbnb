@@ -19,7 +19,7 @@ import com.example.airbnb.ui.calendar.CustomCalendar
 import com.stfalcon.pricerangebar.model.BarEntry
 import kotlin.text.StringBuilder
 
-class PriceBar() : Fragment(), CustomViewClick {
+class PriceBarFragment() : Fragment(), CustomViewClick {
 
     private lateinit var binding: FragmentPricebarBinding
     private val calendarPopUp: CustomCalendar by lazy {

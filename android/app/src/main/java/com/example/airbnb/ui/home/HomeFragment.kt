@@ -7,12 +7,14 @@ import android.content.Intent
 import android.location.LocationListener
 import android.location.LocationManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -32,9 +34,6 @@ import com.example.airbnb.data.Image
 import com.example.airbnb.databinding.FragmentHomeBinding
 import com.example.airbnb.di.NetworkModule
 import com.example.airbnb.ui.calendar.CustomCalendar
-import com.example.airbnb.ui.custom.datepicker.CalendarConstraints
-import com.example.airbnb.ui.custom.datepicker.DateValidatorPointForward
-import com.example.airbnb.ui.custom.datepicker.MaterialDatePicker
 import com.example.airbnb.viewmodels.HomeViewModel
 import com.google.accompanist.appcompattheme.AppCompatTheme
 import com.google.android.material.snackbar.Snackbar
@@ -45,9 +44,9 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by activityViewModels()
     private val adapter = CityItemAdapter(this::onItemClicked)
-    private lateinit var activityContext: Context
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
+    private lateinit var activityContext: Context
     private val calendarPopUp: CustomCalendar by lazy {
         CustomCalendar(this, R.id.action_homeFragment_to_priceBar)
     }
@@ -125,19 +124,24 @@ class HomeFragment : Fragment() {
     private fun popUpCalendar() {
         with(binding) {
             ibSearchButton.setOnClickListener {
-                val constraintsBuilder =
-                    CalendarConstraints.Builder()
-                        .setValidator(DateValidatorPointForward.now())
-
-                val dateRangePicker =
-                    MaterialDatePicker.Builder.dateRangePicker()
-                        .setTitleText("Select dates")
-                        .setCalendarConstraints(constraintsBuilder.build())
-                        .setTheme(R.style.CalendarTheme)
-                        .build()
-
-                dateRangePicker.show(childFragmentManager, "CALENDAR")
-                calendarPopUp.setUpDefaultCalendar()
+                findNavController().navigate(R.id.action_homeFragment_to_googleMap)
+//                calendarPopUp.setUpDefaultCalendar()
+//                val constraintsBuilder =
+//                    CalendarConstraints.Builder()
+//                        .setValidator(DateValidatorPointForward.now())
+//
+//                val dateRangePicker =
+//                    MaterialDatePicker.Builder.dateRangePicker()
+//                        .setTitleText("Select dates")
+//                        .setCalendarConstraints(constraintsBuilder.build())
+//                        .setTheme(R.style.CalendarTheme)
+//                        .build()
+//
+//                dateRangePicker.addOnPositiveButtonClickListener {
+//                    val backButtonFunctionPointer = HomeFragmentDirections.actionHomeFragmentToPriceBar()
+//                    findNavController().navigate(R.id.action_homeFragment_to_priceBar)
+//                }
+//                dateRangePicker.show(childFragmentManager, "CALENDAR")
             }
         }
     }
