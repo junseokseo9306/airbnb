@@ -9,7 +9,6 @@ import com.example.airbnb.network.TmapRequest
 import com.example.airbnb.repository.HomeRepository
 import com.example.airbnb.repository.TmapRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -93,4 +92,5 @@ class HomeViewModel @Inject constructor(
             this.value = tempList
         }
     }
+
 }

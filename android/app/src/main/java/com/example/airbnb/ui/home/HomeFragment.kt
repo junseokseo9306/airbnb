@@ -31,6 +31,7 @@ import com.example.airbnb.common.showSnackbar
 import com.example.airbnb.data.Image
 import com.example.airbnb.databinding.FragmentHomeBinding
 import com.example.airbnb.di.NetworkModule
+import com.example.airbnb.ui.calendar.CustomCalendar
 import com.example.airbnb.ui.custom.datepicker.CalendarConstraints
 import com.example.airbnb.ui.custom.datepicker.DateValidatorPointForward
 import com.example.airbnb.ui.custom.datepicker.MaterialDatePicker
@@ -47,6 +48,9 @@ class HomeFragment : Fragment() {
     private lateinit var activityContext: Context
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
+    private val calendarPopUp: CustomCalendar by lazy {
+        CustomCalendar(this, R.id.action_homeFragment_to_priceBar)
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -114,6 +118,12 @@ class HomeFragment : Fragment() {
             tvWhereToTravel.setOnClickListener {
                 moveToSearchFragment()
             }
+            popUpCalendar()
+        }
+    }
+
+    private fun popUpCalendar() {
+        with(binding) {
             ibSearchButton.setOnClickListener {
                 val constraintsBuilder =
                     CalendarConstraints.Builder()
@@ -127,6 +137,7 @@ class HomeFragment : Fragment() {
                         .build()
 
                 dateRangePicker.show(childFragmentManager, "CALENDAR")
+                calendarPopUp.setUpDefaultCalendar()
             }
         }
     }
@@ -146,7 +157,6 @@ class HomeFragment : Fragment() {
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION
         )
-
         requestPermissionsResult(permissions, object : OnRequestPermissionListener {
             override fun onGranted() {
                 viewModel.loadContents()

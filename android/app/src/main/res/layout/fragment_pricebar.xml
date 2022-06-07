@@ -3,9 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="priceRange"
             type="com.example.airbnb.data.PriceRange" />
+
+        <variable
+            name="priceFragment"
+            type="com.example.airbnb.ui.pricebar.PriceBar" />
 
     </data>
 
@@ -17,21 +22,40 @@
             android:id="@+id/custom_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:titleText="가격그래프"
             app:bodyTextBinding="@{priceRange.totalRange}"
-            />
+            app:clickListener="@{priceFragment}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleText="가격그래프" />
 
         <com.stfalcon.pricerangebar.RangeBarWithChart
             android:id="@+id/stf_range_bar"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/custom_bar" />
 
+        <TextView
+            android:id="@+id/tv_min_price_view"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/item_underline"
+            app:layout_constraintTop_toBottomOf="@id/stf_range_bar" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/item_underline"
+            app:layout_constraintTop_toBottomOf="@id/tv_min_price_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

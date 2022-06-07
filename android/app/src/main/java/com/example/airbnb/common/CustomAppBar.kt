@@ -38,8 +38,14 @@ class CustomAppBar(context: Context, attrs: AttributeSet?) :
         binding.tvPriceRange.text = titleText
     }
 
-    fun setBodyText(bodyText: String) {
-        binding.tvPrice.text = bodyText
+    fun setPriceRange(bodyText: String) {
+        binding.tvMinPrice.text = bodyText
+    }
+
+    fun setBackButtonListener(click: CustomViewClick) {
+        binding.ibBackButton.setOnClickListener {
+            click.goBackBefore()
+        }
     }
 
 }
