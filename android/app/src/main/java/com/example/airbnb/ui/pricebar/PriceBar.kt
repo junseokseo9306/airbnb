@@ -1,5 +1,6 @@
 package com.example.airbnb.ui.pricebar
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -9,16 +10,21 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.airbnb.R
+import com.example.airbnb.common.CustomViewClick
 import com.example.airbnb.data.PriceRange
 import com.example.airbnb.databinding.FragmentPricebarBinding
+import com.example.airbnb.ui.calendar.CustomCalendar
 import com.stfalcon.pricerangebar.model.BarEntry
-import java.lang.StringBuilder
+import kotlin.text.StringBuilder
 
-class PriceBar() : Fragment() {
+class PriceBar() : Fragment(), CustomViewClick {
 
     private lateinit var binding: FragmentPricebarBinding
-
+    private val calendarPopUp: CustomCalendar by lazy {
+        CustomCalendar(this, null)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,6 +39,7 @@ class PriceBar() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.priceFragment = this
         val roomPrice = mutableListOf<Int>()
         roomPrice.add(10000)
         roomPrice.add(10000)
@@ -77,5 +84,9 @@ class PriceBar() : Fragment() {
 
     companion object {
         private const val INITIAL_VALUE = 0f
+    }
+
+    override fun goBackBefore() {
+        calendarPopUp.setUpDefaultCalendar()
     }
 }

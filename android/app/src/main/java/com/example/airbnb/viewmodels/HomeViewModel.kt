@@ -1,13 +1,16 @@
 package com.example.airbnb.viewmodels
 
 import android.util.Log
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.airbnb.common.CustomViewClick
 import com.example.airbnb.data.CityInfo
 import com.example.airbnb.model.City
 import com.example.airbnb.network.TmapRequest
 import com.example.airbnb.repository.HomeRepository
 import com.example.airbnb.repository.TmapRepository
+import com.example.airbnb.ui.calendar.CustomCalendar
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
@@ -71,7 +74,7 @@ class HomeViewModel @Inject constructor(
             val start = System.currentTimeMillis()
 
             cityList.asFlow().flatMapMerge { city ->
-                delay(500)
+                delay(600)
                 tmapRepository.getTime(
                     TmapRequest(
                         myLongitude,
@@ -112,4 +115,5 @@ class HomeViewModel @Inject constructor(
             this.value = tempList
         }
     }
+
 }

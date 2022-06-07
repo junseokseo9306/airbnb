@@ -1,12 +1,19 @@
 package com.example.airbnb.common
 
+import android.util.Log
 import androidx.databinding.BindingAdapter
 
 @BindingAdapter("app:bodyTextBinding")
-fun setBodyText(view: CustomAppBar, text: String?) {
+fun setPriceRange(view: CustomAppBar, text: String?) {
     if (text != null) {
-        view.setBodyText(text)
+        view.setPriceRange(text)
     } else {
-        view.setBodyText("1,000 - 1,000,000+")
+        view.setPriceRange("1,000 -")
     }
+}
+
+@BindingAdapter("app:clickListener")
+fun setClickListener(view: CustomAppBar, listener: CustomViewClick) {
+    Log.d("BindingAdapter", if(listener != null) "${listener.toString()}" else "null")
+    view.setBackButtonListener(listener)
 }
