@@ -6,19 +6,20 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ImageButton
+import androidx.annotation.ColorRes
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.airbnb.R
 import com.example.airbnb.databinding.CustomResidentCountBinding
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-@RequiresApi(Build.VERSION_CODES.M)
 class CustomResidentClickView(context: Context, attrs: AttributeSet) :
     ConstraintLayout(context, attrs) {
 
-    private lateinit var binding: CustomResidentCountBinding
+    private var binding: CustomResidentCountBinding
 
     private var _clickCounts: MutableStateFlow<Int> = MutableStateFlow(0)
     var clickCounts = _clickCounts.asStateFlow()
@@ -80,7 +81,9 @@ class CustomResidentClickView(context: Context, attrs: AttributeSet) :
         }
     }
 
-    private fun setColor(view: ImageButton, color: Int) {
-        context.let { view.setColorFilter(it.getColor(color)) }
+    private fun setColor(view: ImageButton, @ColorRes color: Int) {
+        view.setColorFilter(
+            ContextCompat.getColor(context, color)
+        )
     }
 }
