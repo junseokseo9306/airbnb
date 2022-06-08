@@ -1,4 +1,4 @@
-package com.example.airbnb.common
+package com.example.airbnb.adapters
 
 import android.graphics.Typeface
 import android.text.SpannableStringBuilder

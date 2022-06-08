@@ -1,4 +1,4 @@
-package com.example.airbnb.common
+package com.example.airbnb.adapters
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
