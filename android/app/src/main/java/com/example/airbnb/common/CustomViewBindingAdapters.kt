@@ -1,6 +1,7 @@
 package com.example.airbnb.common
 
 import androidx.databinding.BindingAdapter
+import com.example.airbnb.ui.custom.CustomAppBar
 
 @BindingAdapter("app:bodyTextBinding")
 fun setPriceMinRange(view: CustomAppBar, text: String?) {

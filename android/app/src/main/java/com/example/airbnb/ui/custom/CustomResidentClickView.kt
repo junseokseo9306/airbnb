@@ -1,13 +1,11 @@
-package com.example.airbnb.common
+package com.example.airbnb.ui.custom
 
 import android.content.Context
 import android.graphics.Color
-import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ImageButton
 import androidx.annotation.ColorRes
-import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil

@@ -1,4 +1,4 @@
-package com.example.airbnb.common
+package com.example.airbnb.ui.custom
 
 import android.content.Context
 import android.graphics.Color
@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.airbnb.R
+import com.example.airbnb.common.CustomViewClick
 import com.example.airbnb.databinding.CustomAppbarBinding
 
 class CustomAppBar(context: Context, attrs: AttributeSet?) :
