@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.airbnb.data.CityInfo
 import com.example.airbnb.model.City
 import com.example.airbnb.network.TmapRequest
-import com.example.airbnb.repository.HomeRepository
+import com.example.airbnb.repository.AirbnbRepository
 import com.example.airbnb.repository.TmapRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val homeRepository: HomeRepository,
+    private val airbnbRepository: AirbnbRepository,
     private val tmapRepository: TmapRepository
 ) : ViewModel() {
 
@@ -35,7 +35,7 @@ class HomeViewModel @Inject constructor(
 
     fun loadContents() {
         viewModelScope.launch {
-            val cityList = homeRepository.loadHomeContents()
+            val cityList = airbnbRepository.loadHomeContents()
             getTimeToCity(_myLongitude.value, _myLatitude.value, cityList)
             Log.d("viewModel", "mylongitude ${_myLongitude.value} my latitude ${_myLatitude.value}")
         }

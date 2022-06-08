@@ -1,16 +1,14 @@
 package com.example.airbnb.repository
 
-import com.example.airbnb.datasource.HomeDataSource
+import com.example.airbnb.datasource.AirbnbDataSource
 import com.example.airbnb.dto.toCity
 import com.example.airbnb.model.City
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class HomeRepositoryImpl @Inject constructor(private val dataSource: HomeDataSource) :
-    HomeRepository {
+class AirbnbRepositoryImpl @Inject constructor(private val dataSource: AirbnbDataSource) :
+    AirbnbRepository {
 
     override suspend fun loadHomeContents(): List<City> =
         dataSource.getHomeContents().toCity()

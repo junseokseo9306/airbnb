@@ -1,7 +1,7 @@
 package com.example.airbnb.di
 
-import com.example.airbnb.repository.HomeRepository
-import com.example.airbnb.repository.HomeRepositoryImpl
+import com.example.airbnb.repository.AirbnbRepository
+import com.example.airbnb.repository.AirbnbRepositoryImpl
 import com.example.airbnb.repository.TmapRepository
 import com.example.airbnb.repository.TmapRepositoryImpl
 import dagger.Binds
@@ -16,9 +16,9 @@ abstract class RepositoryModule {
 
     @Singleton
     @Binds
-    abstract fun bindHomeRepository(
-        homeRepositoryImpl: HomeRepositoryImpl
-    ): HomeRepository
+    abstract fun bindAirbnbRepository(
+        airbnbRepositoryImpl: AirbnbRepositoryImpl
+    ): AirbnbRepository
 }
 
 @Module

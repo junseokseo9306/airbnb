@@ -1,7 +1,7 @@
 package com.example.airbnb.di
 
-import com.example.airbnb.datasource.HomeDataSourceImpl
-import com.example.airbnb.datasource.HomeDataSource
+import com.example.airbnb.datasource.AirbnbDataSourceImpl
+import com.example.airbnb.datasource.AirbnbDataSource
 import com.example.airbnb.datasource.TmapDataSource
 import com.example.airbnb.datasource.TmapDataSourceImpl
 import dagger.Binds
@@ -12,13 +12,13 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class HomeDataSourceModule {
+abstract class AirbnbDataSourceModule {
 
     @Singleton
     @Binds
-    abstract fun bindHomeDataSource(
-        homeDataSourceImpl: HomeDataSourceImpl
-    ): HomeDataSource
+    abstract fun bindAirbnbDataSource(
+        airbnbDataSourceImpl: AirbnbDataSourceImpl
+    ): AirbnbDataSource
 }
 
 @Module
