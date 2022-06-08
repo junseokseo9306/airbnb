@@ -4,12 +4,10 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.example.airbnb.R
+import com.example.airbnb.data.SearchFilter
 import com.example.airbnb.ui.custom.datepicker.CalendarConstraints
 import com.example.airbnb.ui.custom.datepicker.DateValidatorPointForward
 import com.example.airbnb.ui.custom.datepicker.MaterialDatePicker
-import androidx.core.util.Pair
-import androidx.navigation.NavDirections
-import com.example.airbnb.data.SearchFilter
 
 class CustomCalendar(private val fragmentID: Fragment, private val action: Int?, private val reservationDetail: SearchFilter) {
 

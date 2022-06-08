@@ -1,9 +1,9 @@
 package com.example.airbnb.data
 
-import java.io.Serializable
 import androidx.core.util.Pair
 import com.example.airbnb.common.timestampToDateString
 import com.example.airbnb.dto.SearchFilterDto
+import java.io.Serializable
 
 data class SearchFilter(
     val location: String,

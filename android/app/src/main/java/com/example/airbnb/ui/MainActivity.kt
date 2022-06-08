@@ -1,22 +1,14 @@
 package com.example.airbnb.ui
 
-import android.location.LocationListener
-import android.location.LocationManager
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.airbnb.R
 import com.example.airbnb.databinding.ActivityMainBinding
-import com.example.airbnb.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-
-private const val PERMISSION_REQUEST_CODE = 100
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
