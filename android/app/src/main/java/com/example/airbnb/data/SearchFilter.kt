@@ -9,7 +9,7 @@ data class SearchFilter(
     val location: String,
     var checkInOut: Pair<Long, Long>?,
     val guests: Int?,
-    val priceRange: Pair<Int, Int>?
+    var priceRange: Pair<Int, Int>?
 ) : Serializable
 
 fun SearchFilter.toDto(): SearchFilterDto {

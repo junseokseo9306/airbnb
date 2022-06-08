@@ -6,13 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.airbnb.R
-import com.example.airbnb.databinding.FragmentSearchBinding
+import androidx.fragment.app.viewModels
 import com.example.airbnb.databinding.FragmentSearchResultBinding
+import com.example.airbnb.viewmodels.SearchResultViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchResultFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchResultBinding
+
+    private val viewModel: SearchResultViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
