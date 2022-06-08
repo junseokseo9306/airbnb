@@ -39,7 +39,7 @@ jobs:
       - name: Docker build
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/codesquad-airbnb:1.0
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/codesquad-airbnb:1.0 .
           docker push ${{ secrets.DOCKER_USERNAME }}/codesquad-airbnb:1.0
           docker rmi ${{ secrets.DOCKER_USERNAME }}/codesquad-airbnb:1.0
         working-directory: ${{env.working-directory}}
