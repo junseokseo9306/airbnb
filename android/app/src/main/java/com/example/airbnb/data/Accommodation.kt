@@ -1,7 +1,7 @@
 package com.example.airbnb.data
 
 data class Accommodation(
-    private val count: Int,
+    val id: Int,
     val name: String,
     val price: Int,
     val rating: Double,
@@ -10,4 +10,3 @@ data class Accommodation(
     val isSuperHost: Boolean,
     val thumbnail: String
 )
-
