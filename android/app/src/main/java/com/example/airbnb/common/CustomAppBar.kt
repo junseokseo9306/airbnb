@@ -2,9 +2,12 @@ package com.example.airbnb.common
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
+import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import com.example.airbnb.R
@@ -25,20 +28,42 @@ class CustomAppBar(context: Context, attrs: AttributeSet?) :
         getAttrs(attrs)
     }
 
-    @SuppressLint("Recycle")
     private fun getAttrs(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomAppBar)
 
-        setTitleText(typedArray.getString(R.styleable.CustomAppBar_titleText))
-        setBodyText(typedArray.getString(R.styleable.CustomAppBar_bodyText))
+        typedArray.getString(R.styleable.CustomAppBar_titleText)?.let { setTitleText(it) }
+
+        typedArray.recycle()
     }
 
-    private fun setTitleText(titleText: String?) {
+    private fun setTitleText(titleText: String) {
         binding.tvPriceRange.text = titleText
     }
 
-    private fun setBodyText(bodyText: String?) {
-        binding.tvPrice.text = bodyText
+    fun setPriceMinRange(bodyText: String) {
+        binding.tvMinPrice.text = bodyText
+    }
+
+    fun setPriceMaxRange(bodyText: String) {
+        binding.tvMaxPrice.text = bodyText
+    }
+
+    fun setBackButtonListener(click: CustomViewClick?) {
+        binding.ibBackButton.setOnClickListener {
+            click?.goBackBefore()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun setNextFragmentButtonListener(click: CustomViewClick?) {
+        if(click == null) {
+            binding.ibCheck.setColorFilter(context.getColor(R.color.grey5))
+        } else {
+            binding.ibCheck.setColorFilter(Color.RED)
+            binding.ibCheck.setOnClickListener {
+                click.goNextFragment()
+            }
+        }
     }
 
 }

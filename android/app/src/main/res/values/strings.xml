@@ -14,4 +14,16 @@
     <string name="from_time">분 거리</string>
     <string name="skip_string">건너뛰기</string>
     <string name="test1">1000</string>
+    <string name="min_price">최저 요금</string>
+    <string name="max_price">최고 요금</string>
+    <string name="adult">성인</string>
+    <string name="over_13years_old">만 13세 이상</string>
+    <string name="kids">어린이</string>
+    <string name="under_12year_old">만 2~12세</string>
+    <string name="baby">유아</string>
+    <string name="under_2year_old">만 2세 미만</string>
+    <string name="initial_value">0</string>
+    <string name="close">Close</string>
+    <string name="like_button">Like Button</string>
+    <string name="accommodation_image">Accommodation Image</string>
 </resources>

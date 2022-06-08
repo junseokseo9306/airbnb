@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
     id 'kotlinx-serialization'
+    id "com.google.android.libraries.mapsplatform.secrets-gradle-plugin"
 }
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
@@ -125,5 +126,8 @@ dependencies {
 
     //stfalcon-pricerangebar
     implementation 'com.github.stfalcon-studio:StfalconPriceRangeBar-android:v1.5'
+
+    //google map
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
 
 }

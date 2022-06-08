@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp">
+
+        <ImageView
+            android:id="@+id/accommodation_image"
+            android:layout_width="match_parent"
+            android:layout_height="357dp"
+            android:background="@drawable/city_item_background"
+            android:contentDescription="@string/accommodation_image"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            style="@style/AirbnbFontStyle.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/city_item_background"
+            android:padding="4dp"
+            android:text="슈퍼호스트"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/like_button"
+            android:src="@drawable/ic_outline_favorite_border_white_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_baseline_star_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/accommodation_image" />
+
+        <TextView
+            android:id="@+id/text_rate"
+            style="@style/AirbnbFontStyle.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/star"
+            app:layout_constraintStart_toEndOf="@id/star"
+            app:layout_constraintTop_toBottomOf="@id/accommodation_image"
+            app:layout_constraintTop_toTopOf="@id/star"
+            tools:text="4.80" />
+
+        <TextView
+            android:id="@+id/text_review_count"
+            style="@style/AirbnbFontStyle.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="@id/text_rate"
+            app:layout_constraintStart_toEndOf="@id/text_rate"
+            app:layout_constraintTop_toTopOf="@id/text_rate"
+            tools:text="(후기 127개)" />
+
+        <TextView
+            android:id="@+id/text_title"
+            style="@style/AirbnbFontStyle.Headline6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_review_count"
+            tools:text="Spacious and Comfortable Cozy ~~~~~~~~~~~~~~" />
+
+        <TextView
+            android:id="@+id/text_price_per_day"
+            style="@style/AirbnbFontStyle.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_title"
+            tools:text="₩82,953 / 박" />
+
+        <TextView
+            android:id="@+id/text_total_price"
+            style="@style/AirbnbFontStyle.Subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/grey3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_price_per_day"
+            tools:text="총액 ₩1,493,154" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
