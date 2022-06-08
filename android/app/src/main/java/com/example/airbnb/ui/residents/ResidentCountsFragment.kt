@@ -2,6 +2,7 @@ package com.example.airbnb.ui.residents
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.example.airbnb.R
 import com.example.airbnb.common.CustomViewClick
+import com.example.airbnb.data.SearchFilter
 import com.example.airbnb.databinding.FragmentResidentCountsBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,6 +39,9 @@ class ResidentsCountsFragment : Fragment(), CustomViewClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val incomingBundle = arguments?.getSerializable("reservationDetail") as SearchFilter
+        Log.d("ResidentCountsFragment", incomingBundle.priceRange.toString())
+
         binding.customBar.setNextFragmentButtonListener(this)
         binding.customBar.setBackButtonListener(this)
 
@@ -60,7 +65,7 @@ class ResidentsCountsFragment : Fragment(), CustomViewClick {
     }
 
     override fun goBackBefore() {
-        findNavController().navigate(R.id.action_residentsCountsFragment_to_priceBar)
+        findNavController().navigate(R.id.action_residentsCountsFragment_to_priceBarFragment)
     }
 
     override fun goNextFragment() {

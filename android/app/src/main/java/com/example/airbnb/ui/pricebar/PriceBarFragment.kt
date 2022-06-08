@@ -2,27 +2,31 @@ package com.example.airbnb.ui.pricebar
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
+import androidx.core.util.Pair
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.airbnb.R
 import com.example.airbnb.common.CustomViewClick
 import com.example.airbnb.data.CustomText
+import com.example.airbnb.data.SearchFilter
 import com.example.airbnb.databinding.FragmentPricebarBinding
 import com.example.airbnb.ui.calendar.CustomCalendar
 import com.stfalcon.pricerangebar.model.BarEntry
+import java.text.SimpleDateFormat
 import kotlin.text.StringBuilder
 
 class PriceBarFragment() : Fragment(), CustomViewClick {
 
     private lateinit var binding: FragmentPricebarBinding
-    private val calendarPopUp: CustomCalendar by lazy {
-        CustomCalendar(this, null)
-    }
+    private lateinit var calendarPopUp: CustomCalendar
+    private lateinit var reservationDetail: SearchFilter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +40,9 @@ class PriceBarFragment() : Fragment(), CustomViewClick {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        reservationDetail = arguments?.getSerializable("reservationDates") as SearchFilter
+        Log.d("PriceBar", reservationDetail.checkInOut.toString())
 
         val roomPrice = mutableListOf<Int>()
         roomPrice.add(10000)
@@ -81,6 +88,16 @@ class PriceBarFragment() : Fragment(), CustomViewClick {
                 priceRangeStringBuilder.clear()
                 minPriceValue = CustomText(leftPinValue ?: "1,000")
                 maxPriceValue = CustomText(rightPinValue ?: "1,000,000+")
+
+                if (leftPinValue != null && rightPinValue != null) {
+                    val min = leftPinValue.toInt() * 1000
+                    val max = rightPinValue.toInt() * 1000
+                    reservationDetail.priceRange = Pair(min, max)
+                } else {
+                    val min = 1000
+                    val max = 1000000
+                    reservationDetail.priceRange = Pair(min, max)
+                }
                 customBar.setNextFragmentButtonListener(this@PriceBarFragment)
             }
 
@@ -92,10 +109,13 @@ class PriceBarFragment() : Fragment(), CustomViewClick {
     }
 
     override fun goBackBefore() {
+        val action = R.id.action_priceBarFragment_self2
+        calendarPopUp = CustomCalendar(this, action, reservationDetail)
         calendarPopUp.setUpDefaultCalendar()
     }
 
     override fun goNextFragment() {
-        findNavController().navigate(R.id.action_priceBar_to_residentsCountsFragment)
+        val bundle = bundleOf("reservationDetail" to reservationDetail)
+        findNavController().navigate(R.id.action_priceBarFragment_to_residentsCountsFragment, bundle)
     }
 }

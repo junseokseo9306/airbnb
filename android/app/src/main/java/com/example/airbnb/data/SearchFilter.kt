@@ -1,8 +1,11 @@
 package com.example.airbnb.data
 
+import java.io.Serializable
+import androidx.core.util.Pair
+
 data class SearchFilter(
     val location: String,
-    val checkInOut: Pair<Long, Long>?,
-    val guests: Int?,
-    val priceRange: Pair<Int, Int>?
-)
+    var checkInOut: Pair<Long, Long>?,
+    var guests: Int?,
+    var priceRange: Pair<Int, Int>?
+): Serializable

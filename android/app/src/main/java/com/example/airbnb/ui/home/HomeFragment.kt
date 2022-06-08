@@ -47,9 +47,6 @@ class HomeFragment : Fragment() {
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
     private lateinit var activityContext: Context
-    private val calendarPopUp: CustomCalendar by lazy {
-        CustomCalendar(this, R.id.action_homeFragment_to_priceBar)
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -124,7 +121,7 @@ class HomeFragment : Fragment() {
     private fun popUpCalendar() {
         with(binding) {
             ibSearchButton.setOnClickListener {
-                calendarPopUp.setUpDefaultCalendar()
+                moveToSearchFragment()
 //                findNavController().navigate(R.id.action_homeFragment_to_googleMap)
 //                calendarPopUp.setUpDefaultCalendar()
 //                val constraintsBuilder =
