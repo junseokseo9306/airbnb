@@ -5,6 +5,12 @@
 
     <data>
 
+        <variable
+            name="accommodation"
+            type="com.example.airbnb.data.Accommodation" />
+
+        <import type="android.view.View" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,6 +20,7 @@
 
         <ImageView
             android:id="@+id/accommodation_image"
+            image="@{accommodation.thumbnail}"
             android:layout_width="match_parent"
             android:layout_height="357dp"
             android:background="@drawable/city_item_background"
@@ -32,8 +39,9 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/city_item_background"
             android:padding="4dp"
-            android:text="슈퍼호스트"
+            android:text="@string/super_host"
             android:textColor="@color/black"
+            android:visibility="@{accommodation.superHost? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,6 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:text="@{String.valueOf(accommodation.rating)}"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/star"
             app:layout_constraintStart_toEndOf="@id/star"
@@ -77,6 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:text="@{@string/reviews_count(accommodation.reviews)}"
             app:layout_constraintBottom_toBottomOf="@id/text_rate"
             app:layout_constraintStart_toEndOf="@id/text_rate"
             app:layout_constraintTop_toTopOf="@id/text_rate"
@@ -90,6 +100,8 @@
             android:layout_marginTop="8dp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="@{accommodation.name}"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_review_count"
             tools:text="Spacious and Comfortable Cozy ~~~~~~~~~~~~~~" />
@@ -97,6 +109,8 @@
         <TextView
             android:id="@+id/text_price_per_day"
             style="@style/AirbnbFontStyle.Subtitle1"
+            money="@{accommodation.price}"
+            text_res="@{@string/price_per_day}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -107,6 +121,8 @@
         <TextView
             android:id="@+id/text_total_price"
             style="@style/AirbnbFontStyle.Subtitle2"
+            money="@{accommodation.totalPrice}"
+            text_res="@{@string/total_price}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
