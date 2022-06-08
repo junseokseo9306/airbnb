@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_homeFragment_to_googleMap"
             app:destination="@id/googleMap" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/priceBar"
@@ -43,4 +46,8 @@
         android:id="@+id/googleMap"
         android:name="com.example.airbnb.ui.map.GoogleMapFragment"
         android:label="GoogleMap" />
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.example.airbnb.ui.search.SearchResultFragment"
+        android:label="SearchResultFragment" />
 </navigation>

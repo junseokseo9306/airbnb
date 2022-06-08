@@ -14,4 +14,7 @@
     <string name="from_time">분 거리</string>
     <string name="skip_string">건너뛰기</string>
     <string name="test1">1000</string>
+    <string name="close">Close</string>
+    <string name="like_button">Like Button</string>
+    <string name="accommodation_image">Accommodation Image</string>
 </resources>

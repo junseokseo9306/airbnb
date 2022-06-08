@@ -124,7 +124,7 @@ class HomeFragment : Fragment() {
     private fun popUpCalendar() {
         with(binding) {
             ibSearchButton.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_googleMap)
+                findNavController().navigate(R.id.action_homeFragment_to_searchResultFragment)
 //                calendarPopUp.setUpDefaultCalendar()
 //                val constraintsBuilder =
 //                    CalendarConstraints.Builder()
