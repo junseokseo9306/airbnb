@@ -28,7 +28,9 @@ import com.example.airbnb.di.NetworkModule
 import com.example.airbnb.viewmodels.HomeViewModel
 import com.google.accompanist.appcompattheme.AppCompatTheme
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding

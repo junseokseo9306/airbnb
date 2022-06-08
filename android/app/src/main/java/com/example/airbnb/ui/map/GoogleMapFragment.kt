@@ -15,7 +15,9 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GoogleMapFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var binding: FragmentGoogleMapBinding

@@ -12,12 +12,13 @@ import com.example.airbnb.R
 import com.example.airbnb.common.CustomViewClick
 import com.example.airbnb.data.SearchFilter
 import com.example.airbnb.databinding.FragmentResidentCountsBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
-
+@AndroidEntryPoint
 class ResidentsCountsFragment : Fragment(), CustomViewClick {
 
     private lateinit var binding: FragmentResidentCountsBinding

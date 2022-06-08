@@ -17,7 +17,9 @@ import com.example.airbnb.data.SearchFilter
 import com.example.airbnb.databinding.FragmentPricebarBinding
 import com.example.airbnb.ui.calendar.CustomCalendar
 import com.stfalcon.pricerangebar.model.BarEntry
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PriceBarFragment() : Fragment(), CustomViewClick {
 
     private lateinit var binding: FragmentPricebarBinding
