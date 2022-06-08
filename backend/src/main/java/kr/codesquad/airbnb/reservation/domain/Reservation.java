@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 import static javax.persistence.FetchType.LAZY;
 
 
-@Entity(name = "reservations")
+@Entity
 @Getter
 @Builder
 @AllArgsConstructor
@@ -24,10 +24,8 @@ public class Reservation {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "id")
     private Accommodation accommodation;
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "id")
     private User user;
     private LocalDate checkIn;
     private LocalDate checkOut;
