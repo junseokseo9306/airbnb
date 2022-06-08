@@ -2,9 +2,7 @@ package com.example.airbnb.data
 
 data class SearchFilter(
     val location: String,
-    val checkIn: Long?,
-    val checkOut: Long?,
+    val checkInOut: Pair<Long, Long>?,
     val guests: Int?,
-    val minPrice: Int?,
-    val maxPrice: Int?
+    val priceRange: Pair<Int, Int>?
 )
