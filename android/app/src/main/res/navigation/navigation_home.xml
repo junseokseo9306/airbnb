@@ -59,4 +59,5 @@
             android:id="@+id/action_priceBarFragment_self2"
             app:destination="@id/priceBarFragment" />
     </fragment>
+
 </navigation>

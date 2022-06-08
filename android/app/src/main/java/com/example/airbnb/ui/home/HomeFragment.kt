@@ -64,6 +64,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.imageUrl = Image(NetworkModule.HERO_IMAGE_URL)
@@ -225,4 +226,5 @@ class HomeFragment : Fragment() {
         private const val AIRBNB_SAMPLE_IMAGE3 =
             "https://news.airbnb.com/wp-content/uploads/sites/4/2022/04/051.jpg?w=1000"
     }
+
 }

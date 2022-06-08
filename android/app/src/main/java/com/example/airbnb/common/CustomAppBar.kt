@@ -28,7 +28,6 @@ class CustomAppBar(context: Context, attrs: AttributeSet?) :
         getAttrs(attrs)
     }
 
-
     private fun getAttrs(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomAppBar)
 
