@@ -18,26 +18,18 @@ import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.airbnb.BuildConfig
 import com.example.airbnb.R
 import com.example.airbnb.adapters.CityItemAdapter
-import com.example.airbnb.common.OnRequestPermissionListener
-import com.example.airbnb.common.hasPermission
-import com.example.airbnb.common.requestPermissionsResult
-import com.example.airbnb.common.showSnackbar
+import com.example.airbnb.common.*
 import com.example.airbnb.data.Image
 import com.example.airbnb.databinding.FragmentHomeBinding
 import com.example.airbnb.di.NetworkModule
-import com.example.airbnb.ui.calendar.CustomCalendar
 import com.example.airbnb.viewmodels.HomeViewModel
 import com.google.accompanist.appcompattheme.AppCompatTheme
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -101,11 +93,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupObserver() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.cityInfo.collect {
-                    adapter.submitList(it)
-                }
+        viewLifecycleOwner.repeatOnLifecycleExtension {
+            viewModel.cityInfo.collect {
+                adapter.submitList(it)
             }
         }
     }

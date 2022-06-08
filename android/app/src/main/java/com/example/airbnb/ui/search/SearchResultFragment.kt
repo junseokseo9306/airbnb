@@ -1,22 +1,19 @@
 package com.example.airbnb.ui.search
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.example.airbnb.R
 import com.example.airbnb.adapters.SearchListAdapter
+import com.example.airbnb.common.repeatOnLifecycleExtension
 import com.example.airbnb.data.SearchFilter
 import com.example.airbnb.databinding.FragmentSearchResultBinding
 import com.example.airbnb.viewmodels.SearchResultViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchResultFragment : Fragment() {
@@ -47,12 +44,10 @@ class SearchResultFragment : Fragment() {
 
         binding.accommodationList.adapter = adapter
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.accommodationList.collect {
-                    binding.textRoomCount.text = getString(R.string.room_count, it.size)
-                    adapter.submitList(it)
-                }
+        viewLifecycleOwner.repeatOnLifecycleExtension {
+            viewModel.accommodationList.collect {
+                binding.textRoomCount.text = getString(R.string.room_count, it.size)
+                adapter.submitList(it)
             }
         }
 
