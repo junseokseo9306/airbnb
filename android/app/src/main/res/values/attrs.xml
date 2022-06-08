@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="CustomAppBar">
-        <attr name="titleText" format="string|reference"/>
-        <attr name="bodyText" format="string|integer|reference"/>
+        <attr name="titleText" format="string|reference" />
+        <attr name="bodyText" format="string|integer|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomResidentClickView">
+        <attr name="titleResident" format="string|reference" />
+        <attr name="bodyResident" format="string|reference" />
     </declare-styleable>
 </resources>

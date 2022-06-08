@@ -31,23 +31,29 @@
         <action
             android:id="@+id/action_homeFragment_to_priceBar"
             app:destination="@id/priceBar" />
-        <action
-            android:id="@+id/action_homeFragment_to_googleMap"
-            app:destination="@id/googleMap" />
-        <action
-            android:id="@+id/action_homeFragment_to_searchResultFragment"
-            app:destination="@id/searchResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/priceBar"
         android:name="com.example.airbnb.ui.pricebar.PriceBarFragment"
-        android:label="PriceBar" />
+        android:label="PriceBar" >
+        <action
+            android:id="@+id/action_priceBar_to_residentsCountsFragment"
+            app:destination="@id/residentsCountsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/googleMap"
         android:name="com.example.airbnb.ui.map.GoogleMapFragment"
         android:label="GoogleMap" />
     <fragment
-        android:id="@+id/searchResultFragment"
-        android:name="com.example.airbnb.ui.search.SearchResultFragment"
-        android:label="SearchResultFragment" />
+        android:id="@+id/residentsCountsFragment"
+        android:name="com.example.airbnb.ui.residents.ResidentsCountsFragment"
+        android:label="fragment_resident_counts"
+        tools:layout="@layout/fragment_resident_counts" >
+        <action
+            android:id="@+id/action_residentsCountsFragment_to_priceBar"
+            app:destination="@id/priceBar" />
+        <action
+            android:id="@+id/action_residentsCountsFragment_to_googleMap"
+            app:destination="@id/googleMap" />
+    </fragment>
 </navigation>
