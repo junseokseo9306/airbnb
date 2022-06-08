@@ -11,6 +11,7 @@ fun setImage(view: ImageView, imageUrl: String) {
     view.load(imageUrl) {
         crossfade(200)
         placeholder(R.drawable.ic_baseline_photo_size_select_actual_24)
+        error(R.drawable.img_not_found)
         transformations(RoundedCornersTransformation(5f, 5f, 5f, 5f))
     }
 }
