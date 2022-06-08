@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="priceRange"
-            type="com.example.airbnb.data.PriceRange" />
+            type="com.example.airbnb.data.CustomText" />
 
         <variable
-            name="priceFragment"
+            name="backListener"
             type="com.example.airbnb.ui.pricebar.PriceBarFragment" />
+
+        <variable
+            name="goNextListener"
+            type="com.example.airbnb.ui.pricebar.PriceBarFragment" />
+
+        <variable
+            name="minPriceValue"
+            type="com.example.airbnb.data.CustomText" />
+
+        <variable
+            name="maxPriceValue"
+            type="com.example.airbnb.data.CustomText" />
 
     </data>
 
@@ -22,8 +35,7 @@
             android:id="@+id/custom_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:bodyTextBinding="@{priceRange.totalRange}"
-            app:clickListener="@{priceFragment}"
+            app:bodyTextBinding="@{priceRange.range}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -40,24 +52,48 @@
 
         <TextView
             android:id="@+id/tv_min_price_view"
+            minPrice="@{minPriceValue.range}"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="60dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/item_underline"
+            android:paddingStart="10dp"
             app:layout_constraintTop_toBottomOf="@id/stf_range_bar" />
 
         <TextView
+            android:id="@+id/tv_max_price_view"
+            maxPrice="@{maxPriceValue.range}"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="13dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/item_underline"
+            android:paddingStart="10dp"
             app:layout_constraintTop_toBottomOf="@id/tv_min_price_view" />
 
+        <View
+            android:id="@+id/view_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/off_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
+        <com.google.android.material.button.MaterialButton
+            style="@style/AirbnbFontStyle.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:elevation="0dp"
+            android:outlineProvider="none"
+            android:text="건너뛰기"
+            app:backgroundTint="@color/off_white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/view_bottom" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
