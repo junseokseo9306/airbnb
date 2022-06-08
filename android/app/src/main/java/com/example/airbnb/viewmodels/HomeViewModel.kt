@@ -51,7 +51,7 @@ class HomeViewModel @Inject constructor(
             val start = System.currentTimeMillis()
 
             cityList.asFlow().flatMapMerge { city ->
-                delay(500)
+                delay(1000)
                 tmapRepository.getTime(
                     TmapRequest(
                         myLongitude,
