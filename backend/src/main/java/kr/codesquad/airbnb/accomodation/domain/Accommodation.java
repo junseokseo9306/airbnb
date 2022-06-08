@@ -37,7 +37,7 @@ public class Accommodation {
 
     public AccommodationResponse convertToAccommodationResponse() {
         Collections.sort(accommodationImages);
-        System.out.println("깃헙 액션 테스트");
+
         return AccommodationResponse.builder()
             .id(getAccommodationId())
             .accomName(accommodationInfo.getName())
