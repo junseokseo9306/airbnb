@@ -56,5 +56,5 @@ jobs:
             sudo docker ps -a -q --filter "name=codesquad-airbnb" | grep -q . && docker stop codesquad-airbnb && docker rm codesquad-airbnb | true
             sudo docker rmi ${{ secrets.DOCKER_USERNAME }}/codesquad-airbnb:1.0
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/codesquad-airbnb:1.0
-            sudo docker run -d -p 80:8080 --name codesquad-airbnb ${{ secrets.DOCKER_USERNAME }}/codesquad-airbnb:1.0 -e MYSQL_HOST=${{ secrets.MYSQL_HOST }} -e MYSQL_USERNAME=${{ secrets.MYSQL_USERNAME }} -e MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}  -e PROFILE=${{ secrets.PROFILE }} -e CLIENT_ID=${{ secrets.CLIENT_ID }} -e CLIENT_PASSWORD=${{ secrets.CLIENT_PASSWORD }}       
+            sudo docker run -d -p 80:8080 --name codesquad-airbnb ${{ secrets.DOCKER_USERNAME }}/codesquad-airbnb:1.0 -e MYSQL_HOST=${{ secrets.MYSQL_HOST }} -e MYSQL_USERNAME=${{ secrets.MYSQL_USERNAME }} -e MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}  -e PROFILE=${{ secrets.PROFILE }} -e CLIENT_ID=${{ secrets.CLIENT_ID }} -e CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}       
             sudo docker rmi -f $(docker images -f "dangling=true" -q) || true
