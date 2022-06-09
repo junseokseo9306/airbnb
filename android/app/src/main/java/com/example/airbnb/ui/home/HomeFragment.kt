@@ -151,7 +151,7 @@ class HomeFragment : Fragment() {
         )
         requestPermissionsResult(permissions, object : OnRequestPermissionListener {
             override fun onGranted() {
-                viewModel.loadContents()
+//                viewModel.loadContents()
             }
 
             override fun onDenied(deniedPermissions: List<String>) {

@@ -34,15 +34,11 @@ class CustomAppBar(context: Context, attrs: AttributeSet?) :
     }
 
     private fun setTitleText(titleText: String) {
-        binding.tvPriceRange.text = titleText
+        binding.tvTitle.text = titleText
     }
 
-    fun setPriceMinRange(bodyText: String) {
-        binding.tvMinPrice.text = bodyText
-    }
-
-    fun setPriceMaxRange(bodyText: String) {
-        binding.tvMaxPrice.text = bodyText
+    fun setSubTitleText(subtitleText: String) {
+        binding.tvSubtitle.text = subtitleText
     }
 
     fun setBackClickListener(click: () -> Unit) {

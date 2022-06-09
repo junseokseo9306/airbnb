@@ -5,10 +5,6 @@
 
     <data>
 
-        <variable
-            name="totalResidents"
-            type="com.example.airbnb.data.CustomText" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +19,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:countTextBinding="@{totalResidents.range}"
             app:titleText="인원 입력" />
 
         <com.example.airbnb.ui.custom.CustomResidentClickView

@@ -1,12 +1,10 @@
 package com.example.airbnb.ui.pricebar
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.core.util.Pair
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -15,15 +13,16 @@ import com.example.airbnb.data.CustomText
 import com.example.airbnb.data.SearchFilter
 import com.example.airbnb.databinding.FragmentPricebarBinding
 import com.example.airbnb.ui.calendar.CustomCalendar
-import com.stfalcon.pricerangebar.model.BarEntry
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.NumberFormat
+import java.util.*
 
 @AndroidEntryPoint
 class PriceBarFragment() : Fragment() {
 
     private lateinit var binding: FragmentPricebarBinding
     private lateinit var calendarPopUp: CustomCalendar
-    private lateinit var reservationDetail: SearchFilter
+    private lateinit var searchFilter: SearchFilter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,11 +36,7 @@ class PriceBarFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        reservationDetail = arguments?.getSerializable("reservationDates") as SearchFilter
-        Log.d("PriceBar", reservationDetail.checkInOut.toString())
-
-        val roomPrice = getRoomPrice()
-        val barEntries = drawPriceRectangle(roomPrice)
+        searchFilter = arguments?.getSerializable("reservationDates") as SearchFilter
         with(binding) {
             customBar.isValid(true)
             customBar.setBackClickListener {
@@ -50,85 +45,55 @@ class PriceBarFragment() : Fragment() {
             customBar.setNextFragmentButtonClickListener {
                 goNextFragment()
             }
-            setPriceRangeBarText(barEntries)
         }
     }
 
-    private fun setPriceRangeBarText(barEntries: ArrayList<BarEntry>) = with(binding) {
-        val priceRangeStringBuilder = StringBuilder("")
+    private fun setPriceRangeBarText(
+        minPrice: Int,
+        maxPrice: Int
+    ) = with(binding) {
+        rangeSlider.values = listOf(minPrice.toFloat(), maxPrice.toFloat())
+        rangeSlider.valueFrom = minPrice.toFloat()
+        rangeSlider.valueTo = maxPrice.toFloat()
+        setCustomBarPriceText(minPrice, maxPrice)
 
-        stfRangeBar.setEntries(barEntries)
-        stfRangeBar.onRangeChanged = { leftPinValue, rightPinValue ->
-            val minPrice = if (leftPinValue == "0") "1" else leftPinValue
-            priceRangeStringBuilder.append("₩")
-            priceRangeStringBuilder.append(minPrice)
-            priceRangeStringBuilder.append(",000")
-            priceRangeStringBuilder.append(" - ")
-            priceRangeStringBuilder.append("₩")
-            priceRangeStringBuilder.append(rightPinValue)
-            priceRangeStringBuilder.append(",000")
-            priceRangeStringBuilder.append(" + ")
-            priceRange = CustomText(priceRangeStringBuilder.toString())
-            priceRangeStringBuilder.clear()
-            minPriceValue = CustomText(leftPinValue ?: "1,000")
-            maxPriceValue = CustomText(rightPinValue ?: "1,000,000+")
-
-            if (leftPinValue != null && rightPinValue != null) {
-                val min = leftPinValue.toInt() * 1000
-                val max = rightPinValue.toInt() * 1000
-                reservationDetail.priceRange = Pair(min, max)
-            } else {
-                val min = 1000
-                val max = 1000000
-                reservationDetail.priceRange = Pair(min, max)
-            }
+        binding.rangeSlider.addOnChangeListener { slider, _, _ ->
+            setCustomBarPriceText(slider.values[0].toInt(), slider.values[1].toInt())
         }
     }
 
-    private fun getRoomPrice(): List<Int> {
-        val roomPrice = mutableListOf<Int>()
-        roomPrice.add(10000)
-        roomPrice.add(10000)
-        roomPrice.add(10000)
-        roomPrice.add(40000)
-        roomPrice.add(50000)
-        roomPrice.add(50000)
-        roomPrice.add(60000)
-        roomPrice.add(60000)
-        roomPrice.add(100000)
-        roomPrice.add(10000)
-        roomPrice.add(10000)
-        roomPrice.add(10000)
-        roomPrice.add(40000)
+    private fun setCustomBarPriceText(minPrice: Int, maxPrice: Int) {
+        val currencyMinPrice = getMoneyFormat(minPrice)
+        val currencyMaxPrice = getMoneyFormat(maxPrice)
 
-        return roomPrice
+        binding.customBar.setSubTitleText(
+            getString(
+                R.string.price_range,
+                currencyMinPrice,
+                currencyMaxPrice
+            )
+        )
+
+        binding.tvMinPriceView.setText(currencyMinPrice)
+        binding.tvMaxPriceView.setText(currencyMaxPrice)
     }
 
-    private fun drawPriceRectangle(roomPrice: List<Int>): ArrayList<BarEntry> {
-        val barEntries = ArrayList<BarEntry>()
-        var initialX = 0f
-        roomPrice.forEach { price ->
-            barEntries.add(BarEntry(initialX, INITIAL_VALUE))
-            barEntries.add(BarEntry(initialX++, price.div(1000).toFloat()))
-            barEntries.add(BarEntry(initialX, price.div(1000).toFloat()))
-            barEntries.add(BarEntry(initialX++, INITIAL_VALUE))
-        }
-
-        return barEntries
-    }
-
-    companion object {
-        private const val INITIAL_VALUE = 0f
+    private fun getMoneyFormat(money: Int): String {
+        val format = NumberFormat.getCurrencyInstance(Locale.getDefault())
+        return format.format(money)
     }
 
     private fun goBackBefore() {
         val action = R.id.action_priceBarFragment_self2
-        calendarPopUp = CustomCalendar(this, action, reservationDetail)
+        calendarPopUp = CustomCalendar(this, action, searchFilter)
         calendarPopUp.setUpDefaultCalendar()
     }
 
     private fun goNextFragment() {
-        val bundle = bundleOf("reservationDetail" to reservationDetail)
-        findNavController().navigate(R.id.action_priceBarFragment_to_residentsCountsFragment, bundle)
+        val bundle = bundleOf("reservationDetail" to searchFilter)
+        findNavController().navigate(
+            R.id.action_priceBarFragment_to_residentsCountsFragment,
+            bundle
+        )
     }
 }
