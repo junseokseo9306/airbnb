@@ -37,9 +37,9 @@ public class LoginService {
         MultiValueMap<String, String> requestPayloads = new LinkedMultiValueMap<>();
         Map<String, String> requestPayload = new HashMap<>();
 //        requestPayload.put("client_id", "{CLIENT_ID}");
-        requestPayload.put("client_id", "a84d9b378c0821e9aab6");
+        requestPayload.put("client_id", "b790c798232643f8b643");
 //        requestPayload.put("client_secret", "${CLIENT_SECRET}");
-        requestPayload.put("client_secret", "18028a0f87206c97c0223d6cdf3da5d29831705b");
+        requestPayload.put("client_secret", "11ea06f857df1984ed2b46d8d903257ae5711806");
         requestPayload.put("code", code);
         requestPayloads.setAll(requestPayload);
 
