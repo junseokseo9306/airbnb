@@ -7,12 +7,15 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.airbnb.R
-import com.example.airbnb.data.CustomText
+import com.example.airbnb.common.repeatOnLifecycleExtension
+import com.example.airbnb.common.timestampToDateString
 import com.example.airbnb.data.SearchFilter
 import com.example.airbnb.databinding.FragmentPricebarBinding
 import com.example.airbnb.ui.calendar.CustomCalendar
+import com.example.airbnb.viewmodels.PriceBarViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
 import java.util.*
@@ -23,6 +26,7 @@ class PriceBarFragment() : Fragment() {
     private lateinit var binding: FragmentPricebarBinding
     private lateinit var calendarPopUp: CustomCalendar
     private lateinit var searchFilter: SearchFilter
+    private val viewModel: PriceBarViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +50,18 @@ class PriceBarFragment() : Fragment() {
                 goNextFragment()
             }
         }
+
+        viewLifecycleOwner.repeatOnLifecycleExtension {
+            viewModel.priceRange.collect {
+                setPriceRangeBarText(it.first, it.second)
+            }
+        }
+
+        viewModel.getPriceRange(
+            searchFilter.location,
+            timestampToDateString(searchFilter.checkInOut?.first!!),
+            timestampToDateString(searchFilter.checkInOut?.second!!)
+        )
     }
 
     private fun setPriceRangeBarText(

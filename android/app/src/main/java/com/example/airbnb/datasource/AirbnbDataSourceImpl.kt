@@ -2,6 +2,7 @@ package com.example.airbnb.datasource
 
 import com.example.airbnb.dto.AccommodationDto
 import com.example.airbnb.dto.CityDto
+import com.example.airbnb.dto.PriceRangeDto
 import com.example.airbnb.dto.SearchFilterDto
 import com.example.airbnb.network.AirbnbApi
 import kotlinx.coroutines.CoroutineDispatcher
@@ -30,5 +31,18 @@ class AirbnbDataSourceImpl @Inject constructor(private val api: AirbnbApi): Airb
                 searchFilterDto.maxPrice
             )
         }
+    }
+
+    // TODO : Price Range API Request
+    override suspend fun getPriceRange(
+        location: String,
+        startDate: String?,
+        endDate: String?
+    ): PriceRangeDto {
+
+        return PriceRangeDto(
+            10000,
+            100000
+        )
     }
 }
