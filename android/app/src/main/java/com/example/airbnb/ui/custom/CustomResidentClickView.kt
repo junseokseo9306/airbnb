@@ -1,26 +1,42 @@
 package com.example.airbnb.ui.custom
 
 import android.content.Context
-import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ImageButton
 import androidx.annotation.ColorRes
+import androidx.annotation.IdRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.databinding.BindingMethod
+import androidx.databinding.BindingMethods
 import androidx.databinding.DataBindingUtil
 import com.example.airbnb.R
 import com.example.airbnb.databinding.CustomResidentCountBinding
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
+@BindingMethods(value = [
+    BindingMethod(
+        type = CustomResidentClickView::class,
+        attribute = "custom:value",
+        method = "setCount"
+    )
+])
 class CustomResidentClickView(context: Context, attrs: AttributeSet) :
     ConstraintLayout(context, attrs) {
 
     private var binding: CustomResidentCountBinding
 
-    private var _clickCounts: MutableStateFlow<Int> = MutableStateFlow(0)
-    var clickCounts = _clickCounts.asStateFlow()
+    interface OnChangeClickCountListener {
+
+        fun onChanged(@IdRes id: Int, step: Int)
+    }
+
+    private var onChangeClickCountListener: OnChangeClickCountListener? = null
+    fun setOnChangeClickCountListener(listener: OnChangeClickCountListener) {
+        onChangeClickCountListener = listener
+    }
+
+    private var count = 0
 
     init {
         binding = DataBindingUtil.inflate(
@@ -43,38 +59,33 @@ class CustomResidentClickView(context: Context, attrs: AttributeSet) :
     }
 
     private fun setTitle(text: String) {
-        binding.tvAdult.text = text
+        binding.tvResidentTitle.text = text
     }
 
     private fun setBody(text: String) {
-        binding.tvBody.text = text
+        binding.tvResidentTitle.text = text
     }
 
     private fun clickButton() {
         with(binding) {
-            var adultCount = tvAdultCount.text.toString().toInt()
-            _clickCounts.value = adultCount
-            setColor(ibAdultMinus, R.color.grey5)
-            ibAdultMinus.setOnClickListener {
-                if (adultCount-- <= 0) {
-                    setColor(ibAdultMinus, R.color.grey5)
-                } else {
-                    if (adultCount == 0) {
-                        _clickCounts.value = 0
-                        setColor(ibAdultMinus, R.color.grey5)
-                        binding.tvAdultCount.text = adultCount.toString()
-                    } else {
-                        _clickCounts.value = adultCount
-                        ibAdultMinus.setColorFilter(Color.BLACK)
-                        binding.tvAdultCount.text = adultCount.toString()
-                    }
+            setColor(subtractCountButton, R.color.grey5)
+            subtractCountButton.setOnClickListener {
+                count--
+                if (count == 0) {
+                    setColor(subtractCountButton, R.color.grey5)
+                    subtractCountButton.isEnabled = false
                 }
+
+                residentCount.text = count.toString()
+                onChangeClickCountListener?.onChanged( id,-1)
             }
-            ibAdultAdd.setOnClickListener {
-                ibAdultMinus.setColorFilter(Color.BLACK)
-                adultCount++
-                _clickCounts.value = adultCount
-                binding.tvAdultCount.text = adultCount.toString()
+
+            addCountButton.setOnClickListener {
+                count++
+                setColor(subtractCountButton, R.color.black)
+                subtractCountButton.isEnabled = true
+                residentCount.text = count.toString()
+                onChangeClickCountListener?.onChanged(id,1)
             }
         }
     }
@@ -83,5 +94,17 @@ class CustomResidentClickView(context: Context, attrs: AttributeSet) :
         view.setColorFilter(
             ContextCompat.getColor(context, color)
         )
+    }
+
+    fun setCount(count: Int) = with(binding) {
+        if (count == 0) {
+            subtractCountButton.isEnabled = false
+            setColor(subtractCountButton, R.color.grey5)
+        } else {
+            subtractCountButton.isEnabled = true
+            setColor(subtractCountButton, R.color.black)
+        }
+
+        residentCount.text = count.toString()
     }
 }

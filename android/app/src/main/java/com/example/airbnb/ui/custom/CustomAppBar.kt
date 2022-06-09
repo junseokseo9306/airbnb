@@ -6,10 +6,19 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.databinding.BindingMethod
+import androidx.databinding.BindingMethods
 import androidx.databinding.DataBindingUtil
 import com.example.airbnb.R
 import com.example.airbnb.databinding.CustomAppbarBinding
 
+@BindingMethods(value = [
+    BindingMethod(
+        type = CustomAppBar::class,
+        attribute = "app:subtitle",
+        method = "setSubTitleText"
+    )
+])
 class CustomAppBar(context: Context, attrs: AttributeSet?) :
     ConstraintLayout(context, attrs) {
 

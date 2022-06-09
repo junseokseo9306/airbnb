@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <ImageButton
-            android:id="@+id/ib_adult_add"
+            android:id="@+id/add_count_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="22dp"
@@ -23,40 +23,40 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_adult_count"
+            android:id="@+id/resident_count"
             style="@style/AirbnbFontStyle.Headline6"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:layout_marginEnd="11dp"
             android:text="@string/initial_value"
-            app:layout_constraintEnd_toStartOf="@id/ib_adult_add"
+            app:layout_constraintEnd_toStartOf="@id/add_count_button"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_body"
+            android:id="@+id/tv_resident_body"
             style="@style/AirbnbFontStyle.Body2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_adult"
+            app:layout_constraintTop_toBottomOf="@id/tv_resident_title"
             tools:text="만 13세 이상" />
 
         <ImageButton
-            android:id="@+id/ib_adult_minus"
+            android:id="@+id/subtract_count_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="22dp"
             android:layout_marginEnd="19dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_property_1_minus"
-            app:layout_constraintEnd_toStartOf="@id/tv_adult_count"
+            app:layout_constraintEnd_toStartOf="@id/resident_count"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_adult"
+            android:id="@+id/tv_resident_title"
             style="@style/AirbnbFontStyle.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
             android:layout_marginTop="22dp"
             android:layout_marginEnd="16dp"
             android:background="@color/grey5"
-            app:layout_constraintTop_toBottomOf="@id/tv_adult_count" />
+            app:layout_constraintTop_toBottomOf="@id/resident_count" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
