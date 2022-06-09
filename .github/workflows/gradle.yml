@@ -9,9 +9,9 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ feature/backend/deploy ]
+    branches: [ backend ]
   pull_request:
-    branches: [ feature/backend/deploy ]
+    branches: [ backend ]
 
 jobs:
   build:
