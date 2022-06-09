@@ -2,11 +2,11 @@ package com.example.airbnb.ui.map
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.example.airbnb.R
 import com.example.airbnb.databinding.FragmentGoogleMapBinding
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -15,7 +15,9 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GoogleMapFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var binding: FragmentGoogleMapBinding

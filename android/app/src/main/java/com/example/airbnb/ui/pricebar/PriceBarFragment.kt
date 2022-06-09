@@ -1,12 +1,10 @@
 package com.example.airbnb.ui.pricebar
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import androidx.core.util.Pair
 import androidx.databinding.DataBindingUtil
@@ -19,9 +17,9 @@ import com.example.airbnb.data.SearchFilter
 import com.example.airbnb.databinding.FragmentPricebarBinding
 import com.example.airbnb.ui.calendar.CustomCalendar
 import com.stfalcon.pricerangebar.model.BarEntry
-import java.text.SimpleDateFormat
-import kotlin.text.StringBuilder
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PriceBarFragment() : Fragment(), CustomViewClick {
 
     private lateinit var binding: FragmentPricebarBinding
@@ -37,7 +35,6 @@ class PriceBarFragment() : Fragment(), CustomViewClick {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

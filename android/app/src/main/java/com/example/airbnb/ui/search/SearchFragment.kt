@@ -13,11 +13,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.airbnb.R
-import com.example.airbnb.databinding.FragmentSearchBinding
 import com.example.airbnb.adapters.CityItemAdapter
 import com.example.airbnb.data.SearchFilter
+import com.example.airbnb.databinding.FragmentSearchBinding
 import com.example.airbnb.ui.calendar.CustomCalendar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding

@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.residents.ResidentsCountsFragment">
 
-        <com.example.airbnb.common.CustomAppBar
+        <com.example.airbnb.ui.custom.CustomAppBar
             android:id="@+id/custom_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
             app:countTextBinding="@{totalResidents.range}"
             app:titleText="인원 입력" />
 
-        <com.example.airbnb.common.CustomResidentClickView
+        <com.example.airbnb.ui.custom.CustomResidentClickView
             android:id="@+id/cv_adult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <com.example.airbnb.common.CustomResidentClickView
+        <com.example.airbnb.ui.custom.CustomResidentClickView
             android:id="@+id/cv_kids"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <com.example.airbnb.common.CustomResidentClickView
+        <com.example.airbnb.ui.custom.CustomResidentClickView
             android:id="@+id/cv_baby"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

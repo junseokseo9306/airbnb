@@ -1,22 +1,20 @@
-package com.example.airbnb.common
+package com.example.airbnb.ui.custom
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
-import android.os.Build
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
-import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.airbnb.R
+import com.example.airbnb.common.CustomViewClick
 import com.example.airbnb.databinding.CustomAppbarBinding
 
 class CustomAppBar(context: Context, attrs: AttributeSet?) :
     ConstraintLayout(context, attrs) {
 
-    private lateinit var binding: CustomAppbarBinding
+    private var binding: CustomAppbarBinding
 
     init {
         binding = DataBindingUtil.inflate(
@@ -54,10 +52,9 @@ class CustomAppBar(context: Context, attrs: AttributeSet?) :
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     fun setNextFragmentButtonListener(click: CustomViewClick?) {
         if(click == null) {
-            binding.ibCheck.setColorFilter(context.getColor(R.color.grey5))
+            binding.ibCheck.setColorFilter(ContextCompat.getColor(context, R.color.grey5))
         } else {
             binding.ibCheck.setColorFilter(Color.RED)
             binding.ibCheck.setOnClickListener {

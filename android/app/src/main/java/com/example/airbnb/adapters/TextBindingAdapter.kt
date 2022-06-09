@@ -1,14 +1,15 @@
-package com.example.airbnb.common
+package com.example.airbnb.adapters
 
 import android.graphics.Typeface
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.AbsoluteSizeSpan
-import android.text.style.RelativeSizeSpan
 import android.text.style.StyleSpan
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.airbnb.R
+import java.text.NumberFormat
+import java.util.*
 
 @BindingAdapter("minute")
 fun setTextView(view: TextView, text: Int) {
@@ -23,7 +24,7 @@ fun setTextView(view: TextView, text: Int) {
 fun setMinPriceTextView(view: TextView, text: String?) {
     val priceTextBuilder = SpannableStringBuilder("")
     priceTextBuilder.append("최저 요금\n")
-    if(text != null) {
+    if (text != null) {
         priceTextBuilder.append(text)
         priceTextBuilder.append(",000")
         priceTextBuilder.setSpan(
@@ -61,7 +62,7 @@ fun setMinPriceTextView(view: TextView, text: String?) {
 fun setMaxPriceTextView(view: TextView, text: String?) {
     val priceTextBuilder = SpannableStringBuilder("")
     priceTextBuilder.append("최고 요금\n")
-    if(text != null) {
+    if (text != null) {
         priceTextBuilder.append(text)
         priceTextBuilder.append(",000")
         priceTextBuilder.setSpan(
@@ -92,5 +93,13 @@ fun setMaxPriceTextView(view: TextView, text: String?) {
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         view.text = priceTextBuilder
+    }
+}
+
+@BindingAdapter("money","text_res")
+fun setMoney(view: TextView, money: Int?, resId: String?) {
+    if (money != null && resId != null) {
+        val format = NumberFormat.getCurrencyInstance(Locale.getDefault())
+        view.text = String.format(resId, format.format(money))
     }
 }

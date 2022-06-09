@@ -1,8 +1,10 @@
 package com.example.airbnb.repository
 
 import com.example.airbnb.datasource.AirbnbDataSource
+import com.example.airbnb.dto.SearchFilterDto
 import com.example.airbnb.dto.toCity
 import com.example.airbnb.model.City
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -12,4 +14,7 @@ class AirbnbRepositoryImpl @Inject constructor(private val dataSource: AirbnbDat
 
     override suspend fun loadHomeContents(): List<City> =
         dataSource.getHomeContents().toCity()
+
+    override suspend fun getAccommodations(searchFilter: SearchFilterDto) =
+        dataSource.getAccommodations(searchFilter, Dispatchers.Default)
 }

@@ -1,9 +1,12 @@
 package com.example.airbnb.repository
 
+import com.example.airbnb.dto.AccommodationDto
+import com.example.airbnb.dto.SearchFilterDto
 import com.example.airbnb.model.City
-import kotlinx.coroutines.flow.Flow
 
 interface AirbnbRepository {
 
     suspend fun loadHomeContents(): List<City>
+
+    suspend fun getAccommodations(searchFilter: SearchFilterDto): AccommodationDto
 }
