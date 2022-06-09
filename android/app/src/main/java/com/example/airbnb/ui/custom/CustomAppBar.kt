@@ -8,7 +8,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.airbnb.R
-import com.example.airbnb.common.CustomViewClick
 import com.example.airbnb.databinding.CustomAppbarBinding
 
 class CustomAppBar(context: Context, attrs: AttributeSet?) :
@@ -46,21 +45,25 @@ class CustomAppBar(context: Context, attrs: AttributeSet?) :
         binding.tvMaxPrice.text = bodyText
     }
 
-    fun setBackButtonListener(click: CustomViewClick?) {
+    fun setBackClickListener(click: () -> Unit) {
         binding.ibBackButton.setOnClickListener {
-            click?.goBackBefore()
+            click()
         }
     }
 
-    fun setNextFragmentButtonListener(click: CustomViewClick?) {
-        if(click == null) {
-            binding.ibCheck.setColorFilter(ContextCompat.getColor(context, R.color.grey5))
-        } else {
+    fun isValid(value: Boolean) {
+        if (value) {
             binding.ibCheck.setColorFilter(Color.RED)
-            binding.ibCheck.setOnClickListener {
-                click.goNextFragment()
-            }
+            binding.ibCheck.isEnabled = true
+        } else {
+            binding.ibCheck.setColorFilter(ContextCompat.getColor(context, R.color.grey5))
+            binding.ibCheck.isEnabled = false
         }
     }
 
+    fun setNextFragmentButtonClickListener(click: () -> Unit) {
+        binding.ibCheck.setOnClickListener {
+            click()
+        }
+    }
 }
