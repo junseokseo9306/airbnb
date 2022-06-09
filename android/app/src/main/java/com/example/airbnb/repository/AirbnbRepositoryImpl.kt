@@ -12,8 +12,8 @@ import javax.inject.Singleton
 class AirbnbRepositoryImpl @Inject constructor(private val dataSource: AirbnbDataSource) :
     AirbnbRepository {
 
-    override suspend fun loadHomeContents(): List<City> =
-        dataSource.getHomeContents().toCity()
+    override suspend fun getCityList(): List<City> =
+        dataSource.getCityDto().toCity()
 
     override suspend fun getAccommodations(searchFilter: SearchFilterDto) =
         dataSource.getAccommodations(searchFilter, Dispatchers.Default)

@@ -7,7 +7,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 
 interface AirbnbDataSource {
 
-    suspend fun getHomeContents(): CityDto
+    suspend fun getCityDto(): CityDto
 
     suspend fun getAccommodations(
         searchFilterDto: SearchFilterDto,

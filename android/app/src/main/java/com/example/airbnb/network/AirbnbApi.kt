@@ -8,7 +8,7 @@ import retrofit2.http.Query
 interface AirbnbApi {
 
     @GET("/api/nearMeCities")
-    suspend fun getHomeContents(): CityDto
+    suspend fun getCityDto(): CityDto
 
     @GET("/api/accommodations")
     suspend fun getAccommodations(

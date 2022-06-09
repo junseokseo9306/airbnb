@@ -12,8 +12,8 @@ import javax.inject.Singleton
 @Singleton
 class AirbnbDataSourceImpl @Inject constructor(private val api: AirbnbApi): AirbnbDataSource {
 
-    override suspend fun getHomeContents(): CityDto {
-        return api.getHomeContents()
+    override suspend fun getCityDto(): CityDto {
+        return api.getCityDto()
     }
 
     override suspend fun getAccommodations(

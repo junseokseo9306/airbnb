@@ -6,7 +6,7 @@ import com.example.airbnb.model.City
 
 interface AirbnbRepository {
 
-    suspend fun loadHomeContents(): List<City>
+    suspend fun getCityList(): List<City>
 
     suspend fun getAccommodations(searchFilter: SearchFilterDto): AccommodationDto
 }
