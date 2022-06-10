@@ -19,4 +19,4 @@ data class Accommodation(
     val thumbnail: String,
     val latitude: Double,
     val longitude: Double
-)
+): java.io.Serializable

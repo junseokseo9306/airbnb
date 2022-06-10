@@ -42,11 +42,11 @@
         android:label="fragment_resident_counts"
         tools:layout="@layout/fragment_resident_counts" >
         <action
-            android:id="@+id/action_residentsCountsFragment_to_googleMap"
-            app:destination="@id/googleMap" />
-        <action
             android:id="@+id/action_residentsCountsFragment_to_priceBarFragment"
             app:destination="@id/priceBarFragment" />
+        <action
+            android:id="@+id/action_residentsCountsFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/priceBarFragment"
@@ -58,6 +58,14 @@
         <action
             android:id="@+id/action_priceBarFragment_self2"
             app:destination="@id/priceBarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.example.airbnb.ui.search.SearchResultFragment"
+        android:label="SearchResultFragment" >
+        <action
+            android:id="@+id/action_searchResultFragment_to_googleMap"
+            app:destination="@id/googleMap" />
     </fragment>
 
 </navigation>

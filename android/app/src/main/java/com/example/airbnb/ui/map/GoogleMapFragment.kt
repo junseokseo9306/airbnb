@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.airbnb.R
+import com.example.airbnb.adapters.SearchListAdapter
+import com.example.airbnb.data.Accommodation
 import com.example.airbnb.databinding.FragmentGoogleMapBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -22,11 +24,12 @@ class GoogleMapFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var binding: FragmentGoogleMapBinding
     private lateinit var mapView: MapView
+    private lateinit var adapter: SearchListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_google_map, container, false)
         mapView = binding.googleMap
         return binding.root
@@ -34,6 +37,14 @@ class GoogleMapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val incomingData = arguments?.getSerializable("accommodationList") as List<Accommodation>
+
+        adapter = SearchListAdapter(false).apply {
+            submitList(incomingData)
+        }
+
+        binding.vpAccommodationList.adapter = adapter
 
         mapView.onCreate(savedInstanceState)
     }

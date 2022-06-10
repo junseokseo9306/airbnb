@@ -67,7 +67,7 @@ class ResidentsCountsFragment : Fragment(), CustomViewClick {
     }
 
     override fun goNextFragment() {
-        findNavController().navigate(R.id.action_residentsCountsFragment_to_googleMap)
+        findNavController().navigate(R.id.action_residentsCountsFragment_to_searchResultFragment)
     }
 
     private fun updateHeaderFirstCountText(count: Int) {

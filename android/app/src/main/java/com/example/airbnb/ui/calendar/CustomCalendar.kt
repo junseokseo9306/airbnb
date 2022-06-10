@@ -9,7 +9,11 @@ import com.example.airbnb.ui.custom.datepicker.CalendarConstraints
 import com.example.airbnb.ui.custom.datepicker.DateValidatorPointForward
 import com.example.airbnb.ui.custom.datepicker.MaterialDatePicker
 
-class CustomCalendar(private val fragmentID: Fragment, private val action: Int?, private val reservationDetail: SearchFilter) {
+class CustomCalendar(
+    private val fragmentID: Fragment,
+    private val action: Int?,
+    private val reservationDetail: SearchFilter
+) {
 
     fun setUpDefaultCalendar() {
         val constraintsBuilder =

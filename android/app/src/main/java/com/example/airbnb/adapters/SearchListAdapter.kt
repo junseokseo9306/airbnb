@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.airbnb.data.Accommodation
 import com.example.airbnb.databinding.AccommodationItemBinding
+import com.example.airbnb.databinding.AccommodationPagerItemBinding
 
 class SearchListAdapter(private val isVertical: Boolean = true) :
     ListAdapter<Accommodation, RecyclerView.ViewHolder>(diffUtil) {
@@ -14,6 +15,12 @@ class SearchListAdapter(private val isVertical: Boolean = true) :
     class VerticalItemViewHolder(private val binding: AccommodationItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        fun bind(accommodation: Accommodation) {
+            binding.accommodation = accommodation
+        }
+    }
+
+    class HorizontalItemViewHolder(private val binding: AccommodationPagerItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(accommodation: Accommodation) {
             binding.accommodation = accommodation
         }
@@ -29,7 +36,13 @@ class SearchListAdapter(private val isVertical: Boolean = true) :
                 )
             )
         } else {
-            TODO("TODO Horizontal Item")
+            return HorizontalItemViewHolder(
+                AccommodationPagerItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
         }
     }
 
@@ -37,7 +50,7 @@ class SearchListAdapter(private val isVertical: Boolean = true) :
         if (isVertical) {
             (holder as VerticalItemViewHolder).bind(getItem(position))
         } else {
-            TODO("TODO Horizontal Item")
+            (holder as HorizontalItemViewHolder).bind(getItem(position))
         }
     }
 }

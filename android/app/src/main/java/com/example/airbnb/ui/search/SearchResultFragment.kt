@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.airbnb.R
 import com.example.airbnb.adapters.SearchListAdapter
 import com.example.airbnb.common.repeatOnLifecycleExtension
+import com.example.airbnb.data.Accommodation
 import com.example.airbnb.data.SearchFilter
 import com.example.airbnb.databinding.FragmentSearchResultBinding
 import com.example.airbnb.viewmodels.SearchResultViewModel
@@ -23,6 +26,8 @@ class SearchResultFragment : Fragment() {
     private val viewModel: SearchResultViewModel by viewModels()
 
     private val adapter = SearchListAdapter()
+
+    private var _accommodationList: List<Accommodation> = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,9 +49,14 @@ class SearchResultFragment : Fragment() {
 
         binding.accommodationList.adapter = adapter
 
+        binding.btGotoMap.setOnClickListener {
+            gotoMapFragment()
+        }
+
         viewLifecycleOwner.repeatOnLifecycleExtension {
             viewModel.accommodationList.collect {
                 binding.textRoomCount.text = getString(R.string.room_count, it.size)
+                _accommodationList = it
                 adapter.submitList(it)
             }
         }
@@ -54,5 +64,10 @@ class SearchResultFragment : Fragment() {
         viewModel.getAccommodations(
             SearchFilter("양재", null, null, null)
         )
+    }
+
+    private fun gotoMapFragment() {
+        val bundle = bundleOf("accommodationList" to _accommodationList)
+        findNavController().navigate(R.id.action_searchResultFragment_to_googleMap, bundle)
     }
 }

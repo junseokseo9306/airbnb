@@ -31,4 +31,5 @@
     <string name="price_per_day">%s / 박</string>
     <string name="total_price">총액 %s</string>
     <string name="super_host">슈퍼호스트</string>
+    <string name="goto_map">map</string>
 </resources>
