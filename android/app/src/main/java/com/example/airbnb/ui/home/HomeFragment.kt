@@ -35,7 +35,9 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by activityViewModels()
-    private val adapter = CityItemAdapter(this::onItemClicked)
+    private val adapter = CityItemAdapter {
+        onItemClicked()
+    }
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
     private lateinit var activityContext: Context
@@ -151,7 +153,7 @@ class HomeFragment : Fragment() {
         )
         requestPermissionsResult(permissions, object : OnRequestPermissionListener {
             override fun onGranted() {
-//                viewModel.loadContents()
+                viewModel.getCityList()
             }
 
             override fun onDenied(deniedPermissions: List<String>) {

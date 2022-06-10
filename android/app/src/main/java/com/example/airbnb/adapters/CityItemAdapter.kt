@@ -8,12 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.airbnb.data.CityInfo
 import com.example.airbnb.databinding.HomeCityItemBinding
 
-class CityItemAdapter(private val onItemClicked: () -> Unit) :
+class CityItemAdapter(private val onItemClicked: (cityName: String) -> Unit) :
     ListAdapter<CityInfo, CityItemAdapter.HomeViewHolder>(CityDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return HomeViewHolder(HomeCityItemBinding.inflate(inflater, parent, false), onItemClicked)
+        return HomeViewHolder(
+            HomeCityItemBinding.inflate(inflater, parent, false),
+            onItemClicked
+        )
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
@@ -22,13 +25,13 @@ class CityItemAdapter(private val onItemClicked: () -> Unit) :
 
     class HomeViewHolder(
         private val binding: HomeCityItemBinding,
-        private val onItemClicked: () -> Unit
+        private val onItemClicked: (String) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(cityInfo: CityInfo) {
             binding.cityInfo = cityInfo
             itemView.setOnClickListener {
-                onItemClicked()
+                onItemClicked(cityInfo.city.cityName)
             }
         }
     }

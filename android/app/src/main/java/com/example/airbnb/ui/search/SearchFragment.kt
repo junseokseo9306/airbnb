@@ -50,20 +50,19 @@ class SearchFragment : Fragment() {
         binding.backMainButton.setOnClickListener {
             findNavController().navigate(R.id.action_searchFragment_to_homeFragment)
         }
-        binding.clearButton.setOnClickListener {
+        registerTextViewForTextChange()
+        registerCloseButton()
+        focusInputTextAndShowKeyboard()
+
+        val adapter = CityItemAdapter { cityName ->
             val action = R.id.action_searchFragment_to_priceBarFragment
             customCalendar = CustomCalendar(
                 this@SearchFragment,
                 action,
-                SearchFilter("양재1동", null, null, null)
+                SearchFilter(cityName, null, null, null)
             )
             customCalendar.setUpDefaultCalendar()
         }
-        registerTextViewForTextChange()
-//        registerCloseButton()
-        focusInputTextAndShowKeyboard()
-
-        val adapter = CityItemAdapter { }
         binding.cityRecyclerview.adapter = adapter
         adapter.submitList(args.cityInfoList.toList())
     }
