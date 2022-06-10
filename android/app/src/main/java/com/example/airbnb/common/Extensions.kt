@@ -6,7 +6,13 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 fun Context.hasPermission(permission: String): Boolean =
     ActivityCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
@@ -37,4 +43,10 @@ fun View.showSnackbar(msgId: Int, showLength: Int, actionMessageId: Int, action:
     snackbar.setAction(context.getString(actionMessageId)) {
         action(this)
     }.show()
+}
+
+fun LifecycleOwner.repeatOnLifecycleExtension(block: suspend CoroutineScope.() -> Unit) {
+    lifecycleScope.launch {
+        lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED, block)
+    }
 }

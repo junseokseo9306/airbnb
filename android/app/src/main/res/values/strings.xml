@@ -26,4 +26,13 @@
     <string name="close">Close</string>
     <string name="like_button">Like Button</string>
     <string name="accommodation_image">Accommodation Image</string>
+    <string name="room_count">%d개의 숙소</string>
+    <string name="reviews_count">(후기 %d개)</string>
+    <string name="price_per_day">%s / 박</string>
+    <string name="total_price">총액 %s</string>
+    <string name="super_host">슈퍼호스트</string>
+    <string name="goto_map">map</string>
+    <string name="price_range">%s - %s</string>
+    <string name="resident_count">게스트 %d, 유아 %d</string>
+    <string name="search_result_string">%s / %s - %s</string>
 </resources>

@@ -1,7 +1,7 @@
 package com.example.airbnb.di
 
-import com.example.airbnb.datasource.AirbnbDataSourceImpl
 import com.example.airbnb.datasource.AirbnbDataSource
+import com.example.airbnb.datasource.AirbnbDataSourceImpl
 import com.example.airbnb.datasource.TmapDataSource
 import com.example.airbnb.datasource.TmapDataSourceImpl
 import dagger.Binds

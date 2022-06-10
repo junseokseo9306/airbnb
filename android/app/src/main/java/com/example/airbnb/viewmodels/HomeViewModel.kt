@@ -33,9 +33,9 @@ class HomeViewModel @Inject constructor(
         setMyLocation(DEFAULT_LOCATION_LATITUDE, DEFAULT_LOCATION_LONGITUDE)
     }
 
-    fun loadContents() {
+    fun getCityList() {
         viewModelScope.launch {
-            val cityList = airbnbRepository.loadHomeContents()
+            val cityList = airbnbRepository.getCityList()
             getTimeToCity(_myLongitude.value, _myLatitude.value, cityList)
             Log.d("viewModel", "mylongitude ${_myLongitude.value} my latitude ${_myLatitude.value}")
         }
@@ -51,7 +51,7 @@ class HomeViewModel @Inject constructor(
             val start = System.currentTimeMillis()
 
             cityList.asFlow().flatMapMerge { city ->
-                delay(500)
+                delay(1000)
                 tmapRepository.getTime(
                     TmapRequest(
                         myLongitude,

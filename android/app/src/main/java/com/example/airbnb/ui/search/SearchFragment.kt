@@ -13,11 +13,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.airbnb.R
-import com.example.airbnb.databinding.FragmentSearchBinding
 import com.example.airbnb.adapters.CityItemAdapter
 import com.example.airbnb.data.SearchFilter
+import com.example.airbnb.databinding.FragmentSearchBinding
 import com.example.airbnb.ui.calendar.CustomCalendar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
@@ -48,20 +50,19 @@ class SearchFragment : Fragment() {
         binding.backMainButton.setOnClickListener {
             findNavController().navigate(R.id.action_searchFragment_to_homeFragment)
         }
-        binding.clearButton.setOnClickListener {
+        registerTextViewForTextChange()
+        registerCloseButton()
+        focusInputTextAndShowKeyboard()
+
+        val adapter = CityItemAdapter { cityName ->
             val action = R.id.action_searchFragment_to_priceBarFragment
             customCalendar = CustomCalendar(
                 this@SearchFragment,
                 action,
-                SearchFilter("양재1동", null, null, null)
+                SearchFilter(cityName, null, null, null)
             )
             customCalendar.setUpDefaultCalendar()
         }
-        registerTextViewForTextChange()
-//        registerCloseButton()
-        focusInputTextAndShowKeyboard()
-
-        val adapter = CityItemAdapter { }
         binding.cityRecyclerview.adapter = adapter
         adapter.submitList(args.cityInfoList.toList())
     }

@@ -1,22 +1,28 @@
-package com.example.airbnb.common
+package com.example.airbnb.ui.custom
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
-import android.os.Build
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
-import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.databinding.BindingMethod
+import androidx.databinding.BindingMethods
 import androidx.databinding.DataBindingUtil
 import com.example.airbnb.R
 import com.example.airbnb.databinding.CustomAppbarBinding
 
+@BindingMethods(value = [
+    BindingMethod(
+        type = CustomAppBar::class,
+        attribute = "app:subtitle",
+        method = "setSubTitleText"
+    )
+])
 class CustomAppBar(context: Context, attrs: AttributeSet?) :
     ConstraintLayout(context, attrs) {
 
-    private lateinit var binding: CustomAppbarBinding
+    private var binding: CustomAppbarBinding
 
     init {
         binding = DataBindingUtil.inflate(
@@ -37,33 +43,32 @@ class CustomAppBar(context: Context, attrs: AttributeSet?) :
     }
 
     private fun setTitleText(titleText: String) {
-        binding.tvPriceRange.text = titleText
+        binding.tvTitle.text = titleText
     }
 
-    fun setPriceMinRange(bodyText: String) {
-        binding.tvMinPrice.text = bodyText
+    fun setSubTitleText(subtitleText: String) {
+        binding.tvSubtitle.text = subtitleText
     }
 
-    fun setPriceMaxRange(bodyText: String) {
-        binding.tvMaxPrice.text = bodyText
-    }
-
-    fun setBackButtonListener(click: CustomViewClick?) {
+    fun setBackClickListener(click: () -> Unit) {
         binding.ibBackButton.setOnClickListener {
-            click?.goBackBefore()
+            click()
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    fun setNextFragmentButtonListener(click: CustomViewClick?) {
-        if(click == null) {
-            binding.ibCheck.setColorFilter(context.getColor(R.color.grey5))
-        } else {
+    fun isValid(value: Boolean) {
+        if (value) {
             binding.ibCheck.setColorFilter(Color.RED)
-            binding.ibCheck.setOnClickListener {
-                click.goNextFragment()
-            }
+            binding.ibCheck.isEnabled = true
+        } else {
+            binding.ibCheck.setColorFilter(ContextCompat.getColor(context, R.color.grey5))
+            binding.ibCheck.isEnabled = false
         }
     }
 
+    fun setNextFragmentButtonClickListener(click: () -> Unit) {
+        binding.ibCheck.setOnClickListener {
+            click()
+        }
+    }
 }

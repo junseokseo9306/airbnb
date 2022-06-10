@@ -15,18 +15,24 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="24dp">
+        android:layout_height="match_parent"
+        android:layout_margin="12dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/accommodation_image"
             image="@{accommodation.thumbnail}"
-            android:layout_width="match_parent"
-            android:layout_height="357dp"
+            android:layout_width="112.5dp"
+            android:layout_height="120dp"
             android:background="@drawable/city_item_background"
             android:contentDescription="@string/accommodation_image"
             android:scaleType="fitXY"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_launcher_background" />
@@ -36,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/city_item_background"
             android:padding="4dp"
             android:text="@string/super_host"
@@ -49,22 +55,24 @@
             android:id="@+id/btn_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="7dp"
             android:layout_marginEnd="10dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/like_button"
             android:src="@drawable/ic_outline_favorite_border_white_24"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/text_review_count"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/ic_baseline_star_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/accommodation_image" />
+            app:layout_constraintStart_toEndOf="@id/accommodation_image"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_rate"
@@ -95,16 +103,17 @@
         <TextView
             android:id="@+id/text_title"
             style="@style/AirbnbFontStyle.Headline6"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="17dp"
             android:ellipsize="end"
-            android:maxLines="1"
+            android:maxLines="2"
             android:text="@{accommodation.name}"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/accommodation_image"
             app:layout_constraintTop_toBottomOf="@id/text_review_count"
-            tools:text="Spacious and Comfortable Cozy ~~~~~~~~~~~~~~" />
+            tools:text="Spacious and Comfortable Cozy ~~~~~~~~~~~~~~~~" />
 
         <TextView
             android:id="@+id/text_price_per_day"
@@ -113,23 +122,12 @@
             text_res="@{@string/price_per_day}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/accommodation_image"
             app:layout_constraintTop_toBottomOf="@id/text_title"
             tools:text="₩82,953 / 박" />
 
-        <TextView
-            android:id="@+id/text_total_price"
-            style="@style/AirbnbFontStyle.Subtitle2"
-            money="@{accommodation.totalPrice}"
-            text_res="@{@string/total_price}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/grey3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_price_per_day"
-            tools:text="총액 ₩1,493,154" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

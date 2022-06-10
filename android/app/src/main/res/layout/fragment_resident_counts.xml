@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="totalResidents"
-            type="com.example.airbnb.data.CustomText" />
+            name="viewModel"
+            type="com.example.airbnb.viewmodels.ResidentCountsViewModel" />
 
     </data>
 
@@ -16,45 +16,48 @@
         android:layout_height="match_parent"
         tools:context=".ui.residents.ResidentsCountsFragment">
 
-        <com.example.airbnb.common.CustomAppBar
+        <com.example.airbnb.ui.custom.CustomAppBar
             android:id="@+id/custom_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:countTextBinding="@{totalResidents.range}"
+            app:subtitle="@{@string/resident_count(viewModel.totalAdultCount, viewModel.totalBabyCount)}"
             app:titleText="인원 입력" />
 
-        <com.example.airbnb.common.CustomResidentClickView
+        <com.example.airbnb.ui.custom.CustomResidentClickView
             android:id="@+id/cv_adult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:titleResident="@string/adult"
             app:bodyResident="@string/over_13years_old"
-            app:layout_constraintTop_toBottomOf="@id/custom_bar"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/custom_bar"
+            app:titleResident="@string/adult"
+            app:value="@{viewModel.adultCount}" />
 
-        <com.example.airbnb.common.CustomResidentClickView
+        <com.example.airbnb.ui.custom.CustomResidentClickView
             android:id="@+id/cv_kids"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:titleResident="@string/kids"
             app:bodyResident="@string/under_12year_old"
-            app:layout_constraintTop_toBottomOf="@id/cv_adult"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/cv_adult"
+            app:titleResident="@string/kids"
+            app:value="@{viewModel.kidsCount}" />
 
-        <com.example.airbnb.common.CustomResidentClickView
+        <com.example.airbnb.ui.custom.CustomResidentClickView
             android:id="@+id/cv_baby"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:titleResident="@string/baby"
             app:bodyResident="@string/under_2year_old"
-            app:layout_constraintTop_toBottomOf="@id/cv_kids"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/cv_kids"
+            app:titleResident="@string/baby"
+            app:value="@{viewModel.babyCount}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
