@@ -1,6 +1,7 @@
 package com.example.airbnb.ui.pricebar
 
 import android.os.Bundle
+import androidx.core.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -106,7 +107,11 @@ class PriceBarFragment() : Fragment() {
     }
 
     private fun goNextFragment() {
-        val bundle = bundleOf("reservationDetail" to searchFilter)
+        val slider = binding.rangeSlider
+        val copySearchFilter = searchFilter.copy(
+            priceRange = Pair(slider.values[0].toInt(), slider.values[1].toInt())
+        )
+        val bundle = bundleOf("reservationDetail" to copySearchFilter)
         findNavController().navigate(
             R.id.action_priceBarFragment_to_residentsCountsFragment,
             bundle

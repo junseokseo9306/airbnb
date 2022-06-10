@@ -34,4 +34,5 @@
     <string name="goto_map">map</string>
     <string name="price_range">%s - %s</string>
     <string name="resident_count">게스트 %d, 유아 %d</string>
+    <string name="search_result_string">%s / %s - %s</string>
 </resources>

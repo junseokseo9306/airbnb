@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.airbnb.R
 import com.example.airbnb.adapters.SearchListAdapter
 import com.example.airbnb.common.repeatOnLifecycleExtension
+import com.example.airbnb.common.timestampToDateString
 import com.example.airbnb.data.Accommodation
 import com.example.airbnb.data.SearchFilter
 import com.example.airbnb.databinding.FragmentSearchResultBinding
@@ -39,6 +40,14 @@ class SearchResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val incomingBundle = arguments?.getSerializable("reservationDetail") as SearchFilter
+        binding.toolbar.title = getString(
+            R.string.search_result_string,
+            incomingBundle.location,
+            timestampToDateString(incomingBundle.checkInOut?.first!!, "yyyy년 MM월 dd일"),
+            timestampToDateString(incomingBundle.checkInOut?.second!!, "yyyy년 MM월 dd일")
+        )
 
         binding.toolbar.setNavigationOnClickListener {
             Toast.makeText(requireContext(), "Navigation Button", Toast.LENGTH_LONG).show()

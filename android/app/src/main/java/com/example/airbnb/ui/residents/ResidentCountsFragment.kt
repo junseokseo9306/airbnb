@@ -1,10 +1,10 @@
 package com.example.airbnb.ui.residents
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -35,9 +35,6 @@ class ResidentsCountsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val incomingBundle = arguments?.getSerializable("reservationDetail") as SearchFilter
-        Log.d("ResidentCountsFragment", incomingBundle.priceRange.toString())
-
         setCustomBarListener()
         setViewModel()
     }
@@ -63,6 +60,11 @@ class ResidentsCountsFragment : Fragment() {
     }
 
     private fun goNextFragment() {
-        findNavController().navigate(R.id.action_residentsCountsFragment_to_searchResultFragment)
+        val copySearchFilter = arguments?.getSerializable("reservationDetail") as SearchFilter
+        val bundle = bundleOf("reservationDetail" to copySearchFilter)
+        findNavController().navigate(
+            R.id.action_residentsCountsFragment_to_searchResultFragment,
+            bundle
+        )
     }
 }

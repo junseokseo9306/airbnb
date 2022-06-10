@@ -15,10 +15,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="12dp">
 
         <View
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="120dp"
             android:background="@color/white"
             app:layout_constraintStart_toStartOf="parent"
@@ -102,13 +103,14 @@
         <TextView
             android:id="@+id/text_title"
             style="@style/AirbnbFontStyle.Headline6"
-            android:layout_width="160dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="17dp"
             android:ellipsize="end"
             android:maxLines="2"
             android:text="@{accommodation.name}"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/accommodation_image"
             app:layout_constraintTop_toBottomOf="@id/text_review_count"
             tools:text="Spacious and Comfortable Cozy ~~~~~~~~~~~~~~~~" />
