@@ -19,7 +19,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private const val BASE_URL = "https://d08319fb-0433-4e9e-a6fb-4a8b2bcee2b7.mock.pstmn.io"
+    private const val BASE_URL = "https://141d49a8-e134-4530-b6e9-26254875e6dd.mock.pstmn.io/"
     private const val TMAP_URL = "https://apis.openapi.sk.com/tmap/"
     const val HERO_IMAGE_URL =
         "https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q202_Luxe_WanakaNZ_LivingRoom_0264-LightOn_R1.jpg?w=1536"
