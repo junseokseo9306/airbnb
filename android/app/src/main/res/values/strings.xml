@@ -35,4 +35,5 @@
     <string name="price_range">%s - %s</string>
     <string name="resident_count">게스트 %d, 유아 %d</string>
     <string name="search_result_string">%s / %s - %s</string>
+    <string name="google_map_custom_text_price_marker">₩%s</string>
 </resources>
