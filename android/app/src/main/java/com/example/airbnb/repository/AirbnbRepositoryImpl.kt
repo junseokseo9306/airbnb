@@ -22,7 +22,7 @@ class AirbnbRepositoryImpl @Inject constructor(private val dataSource: AirbnbDat
     override suspend fun getPriceRange(
         location: String,
         startDate: String?,
-        endDate: String?
+        endDate: String?,
     ): PriceRangeDto {
         return dataSource.getPriceRange(
             location,

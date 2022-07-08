@@ -11,11 +11,11 @@ import javax.inject.Singleton
 
 @Singleton
 class TmapDataSourceImpl @Inject constructor(
-    private val tmapApi: TmapApi
+    private val tmapApi: TmapApi,
 ) : TmapDataSource {
     override fun getTime(
         tmapRequest: TmapRequest,
-        dispatcher: CoroutineDispatcher
+        dispatcher: CoroutineDispatcher,
     ) = flow {
         val time = tmapApi.getTime(
             BuildConfig.TMAP_APP_KEY,

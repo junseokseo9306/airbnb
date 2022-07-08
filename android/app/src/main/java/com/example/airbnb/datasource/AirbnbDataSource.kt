@@ -12,12 +12,12 @@ interface AirbnbDataSource {
 
     suspend fun getAccommodations(
         searchFilterDto: SearchFilterDto,
-        dispatcher: CoroutineDispatcher
+        dispatcher: CoroutineDispatcher,
     ): AccommodationDto
 
     suspend fun getPriceRange(
         location: String,
         startDate: String?,
-        endDate: String?
+        endDate: String?,
     ): PriceRangeDto
 }

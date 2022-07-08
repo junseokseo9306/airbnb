@@ -18,5 +18,5 @@ data class Accommodation(
     val isSuperHost: Boolean,
     val thumbnail: String,
     val latitude: Double,
-    val longitude: Double
-): java.io.Serializable
+    val longitude: Double,
+) : java.io.Serializable

@@ -96,7 +96,7 @@ fun setMaxPriceTextView(view: TextView, text: String?) {
     }
 }
 
-@BindingAdapter("money","text_res")
+@BindingAdapter("money", "text_res")
 fun setMoney(view: TextView, money: Int?, resId: String?) {
     if (money != null && resId != null) {
         val format = NumberFormat.getCurrencyInstance(Locale.getDefault())

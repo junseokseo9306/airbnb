@@ -1,6 +1,5 @@
 package com.example.airbnb.datasource
 
-import com.example.airbnb.data.Accommodation
 import com.example.airbnb.dto.AccommodationDto
 import com.example.airbnb.dto.CityDto
 import com.example.airbnb.dto.PriceRangeDto
@@ -20,7 +19,7 @@ class AirbnbDataSourceImpl @Inject constructor(private val api: AirbnbApi) : Air
 
     override suspend fun getAccommodations(
         searchFilterDto: SearchFilterDto,
-        dispatcher: CoroutineDispatcher
+        dispatcher: CoroutineDispatcher,
     ): AccommodationDto {
         return withContext(dispatcher) {
             api.getAccommodations(
@@ -38,7 +37,7 @@ class AirbnbDataSourceImpl @Inject constructor(private val api: AirbnbApi) : Air
     override suspend fun getPriceRange(
         location: String,
         startDate: String?,
-        endDate: String?
+        endDate: String?,
     ): PriceRangeDto {
 
         return PriceRangeDto(

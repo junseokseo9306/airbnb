@@ -91,6 +91,5 @@ fun test1() {
         Accommodation("AA", "FF"),
         Accommodation("AA", "GG")
     )
-
     AccommodationList(data)
 }

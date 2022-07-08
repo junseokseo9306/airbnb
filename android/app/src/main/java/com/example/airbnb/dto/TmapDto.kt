@@ -5,17 +5,17 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class TmapDto(
-    val features: List<Feature>?
+    val features: List<Feature>?,
 )
 
 @Serializable
 data class Properties(
-    val totalTime: Int?
+    val totalTime: Int?,
 )
 
 @Serializable
 data class Feature(
-    val properties: Properties?
+    val properties: Properties?,
 )
 
 fun TmapDto.toTmap(): Tmap {

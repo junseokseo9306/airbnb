@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 data class AccommodationDto(
     val count: Int,
     @SerialName("accommodations")
-    val accommodations: List<Accommodation>
+    val accommodations: List<Accommodation>,
 )

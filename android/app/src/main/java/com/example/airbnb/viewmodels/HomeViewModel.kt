@@ -1,6 +1,5 @@
 package com.example.airbnb.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.airbnb.data.CityInfo
@@ -18,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val airbnbRepository: AirbnbRepository,
-    private val tmapRepository: TmapRepository
+    private val tmapRepository: TmapRepository,
 ) : ViewModel() {
 
     private val _myLongitude: MutableStateFlow<Double> = MutableStateFlow(0.0)
@@ -37,7 +36,6 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             val cityList = airbnbRepository.getCityList()
             getTimeToCity(_myLongitude.value, _myLatitude.value, cityList)
-            Log.d("viewModel", "mylongitude ${_myLongitude.value} my latitude ${_myLatitude.value}")
         }
     }
 
@@ -45,11 +43,10 @@ class HomeViewModel @Inject constructor(
     private fun getTimeToCity(
         myLongitude: Double,
         myLatitude: Double,
-        cityList: List<City>
+        cityList: List<City>,
     ) {
         viewModelScope.launch {
             val start = System.currentTimeMillis()
-
             cityList.asFlow().flatMapMerge { city ->
                 delay(1000)
                 tmapRepository.getTime(
@@ -69,11 +66,9 @@ class HomeViewModel @Inject constructor(
                 )
             }
             val end = System.currentTimeMillis()
-            Log.d("viewModel", "${(end - start)} 초")
         }
     }
 
-    //helper function
     fun setMyLocation(latitude: Double, longitude: Double) {
         _myLatitude.value = latitude
         _myLongitude.value = longitude
@@ -92,5 +87,4 @@ class HomeViewModel @Inject constructor(
             this.value = tempList
         }
     }
-
 }

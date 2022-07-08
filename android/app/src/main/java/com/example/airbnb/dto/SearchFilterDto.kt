@@ -9,5 +9,5 @@ data class SearchFilterDto(
     val checkOut: String?,
     val guests: Int?,
     val minPrice: Int?,
-    val maxPrice: Int?
+    val maxPrice: Int?,
 )

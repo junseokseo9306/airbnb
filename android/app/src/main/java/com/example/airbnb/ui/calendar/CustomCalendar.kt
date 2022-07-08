@@ -12,7 +12,7 @@ import com.example.airbnb.ui.custom.datepicker.MaterialDatePicker
 class CustomCalendar(
     private val fragmentID: Fragment,
     private val action: Int?,
-    private val reservationDetail: SearchFilter
+    private val reservationDetail: SearchFilter,
 ) {
 
     fun setUpDefaultCalendar() {
@@ -37,6 +37,4 @@ class CustomCalendar(
         }
         dateRangePicker.show(fragmentID.childFragmentManager, "CALENDAR")
     }
-
-
 }

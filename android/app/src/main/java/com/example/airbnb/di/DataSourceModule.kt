@@ -17,7 +17,7 @@ abstract class AirbnbDataSourceModule {
     @Singleton
     @Binds
     abstract fun bindAirbnbDataSource(
-        airbnbDataSourceImpl: AirbnbDataSourceImpl
+        airbnbDataSourceImpl: AirbnbDataSourceImpl,
     ): AirbnbDataSource
 }
 
@@ -28,6 +28,6 @@ abstract class TmapDataSourceModule {
     @Singleton
     @Binds
     abstract fun bindTmapDataSource(
-        tmapDataSourceImpl: TmapDataSourceImpl
+        tmapDataSourceImpl: TmapDataSourceImpl,
     ): TmapDataSource
 }

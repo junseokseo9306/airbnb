@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class TmapRepositoryImpl @Inject constructor(
-    private val tmapDataSource: TmapDataSource
+    private val tmapDataSource: TmapDataSource,
 ) : TmapRepository {
     override fun getTime(tmapRequest: TmapRequest): Flow<Tmap> =
         tmapDataSource.getTime(tmapRequest, Dispatchers.Default).map { tmapDto ->

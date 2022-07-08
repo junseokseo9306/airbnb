@@ -17,6 +17,6 @@ interface AirbnbApi {
         @Query("checkOut") checkOut: String?,
         @Query("guests") guests: Int?,
         @Query("minPrice") minPrice: Int?,
-        @Query("maxPrice") maxPrice: Int?
+        @Query("maxPrice") maxPrice: Int?,
     ): AccommodationDto
 }

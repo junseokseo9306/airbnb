@@ -18,17 +18,11 @@
 
 ---
 
-## 팀 구성원
+## App 구동 화면
 
-### Backend
-
-- 반스 (https://github.com/ffinn92)
-- 피오 (https://github.com/NB993)
-
-### Android
-
-- Josh (https://github.com/junseokseo9306))
-- Wooki (https://github.com/banjjak2)
+|로그인화면|캘린더 선택화면|위치선택화면|
+|-------|------------|--------|
+|![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/8a0cfa11-7b63-4f60-b9b3-1b204df7dafb/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220707%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220707T054714Z&X-Amz-Expires=86400&X-Amz-Signature=f18ed2239a97770b3a92b29cd1876e351944be4146f0e96c5917b686266f7caf&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject) | ![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/47055665-6151-4627-8fe7-ca2ea9c46302/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220707%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220707T055206Z&X-Amz-Expires=86400&X-Amz-Signature=b676c9a8de80c028a9d9c6f2d404f1545df717a28e6f2fca70c1ed9318800554&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject) | ![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/bf13f0b6-8e1d-48c8-8935-8cbc57765cd9/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220707%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220707T055225Z&X-Amz-Expires=86400&X-Amz-Signature=8eda87f82d3b6567f9dcbb966531a3b184ad7a9a2e528b950e6568b8f5da18e4&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)
 
 ---
 
@@ -62,14 +56,6 @@
 
 ---
 
-## App 구동 화면
-
-|로그인화면|캘린더 선택화면|위치선택화면|
-|-------|------------|--------|
-|![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/8a0cfa11-7b63-4f60-b9b3-1b204df7dafb/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220707%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220707T054714Z&X-Amz-Expires=86400&X-Amz-Signature=f18ed2239a97770b3a92b29cd1876e351944be4146f0e96c5917b686266f7caf&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject) | ![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/47055665-6151-4627-8fe7-ca2ea9c46302/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220707%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220707T055206Z&X-Amz-Expires=86400&X-Amz-Signature=b676c9a8de80c028a9d9c6f2d404f1545df717a28e6f2fca70c1ed9318800554&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject) | ![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/bf13f0b6-8e1d-48c8-8935-8cbc57765cd9/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220707%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220707T055225Z&X-Amz-Expires=86400&X-Amz-Signature=8eda87f82d3b6567f9dcbb966531a3b184ad7a9a2e528b950e6568b8f5da18e4&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)
-
----
-
 ## 기술적 도전
 
 ---
@@ -89,5 +75,19 @@
 - 비즈니스 로직이 변경될 가능성이 큰 데이터 레이어, UI레이어로 구분하여 결합도를 낮추기 위해서 MVVM 패턴을 채택하였습니다.
 - ViewModel과 View의 역할을 나누는 작업을 리펙토링 과정에서 많이 수정하였으며, View는 유저에게 UI를 보여주는 역할만, ViewModel은 로직을 담는
 역할을 적절히 분배하려 노력하였고, 이를 통해서 역할분리를 나누었습니다. 
+
+---
+
+## 팀 구성원
+
+### Backend
+
+- 반스 (https://github.com/ffinn92)
+- 피오 (https://github.com/NB993)
+
+### Android
+
+- Josh (https://github.com/junseokseo9306))
+- Wooki (https://github.com/banjjak2)
 
 ---

@@ -25,7 +25,7 @@ class CityItemAdapter(private val onItemClicked: (cityName: String) -> Unit) :
 
     class HomeViewHolder(
         private val binding: HomeCityItemBinding,
-        private val onItemClicked: (String) -> Unit
+        private val onItemClicked: (String) -> Unit,
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(cityInfo: CityInfo) {

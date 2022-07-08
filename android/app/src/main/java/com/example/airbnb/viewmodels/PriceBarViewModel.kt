@@ -24,7 +24,6 @@ class PriceBarViewModel @Inject constructor(
                 startDate,
                 endDate
             )
-
             _priceRange.value = Pair(range.minPrice, range.maxPrice)
         }
     }

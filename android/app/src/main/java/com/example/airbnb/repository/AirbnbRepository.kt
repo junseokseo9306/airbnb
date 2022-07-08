@@ -14,6 +14,6 @@ interface AirbnbRepository {
     suspend fun getPriceRange(
         location: String,
         startDate: String?,
-        endDate: String?
+        endDate: String?,
     ): PriceRangeDto
 }

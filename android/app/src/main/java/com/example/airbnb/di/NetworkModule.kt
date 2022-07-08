@@ -39,7 +39,7 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideAirbnbApi(
-        okHttpClient: OkHttpClient
+        okHttpClient: OkHttpClient,
     ): AirbnbApi {
         val contentType = "application/json".toMediaType()
         return Retrofit.Builder()
@@ -65,7 +65,7 @@ object NetworkModule {
     @Singleton
     fun provideTmapApi(
         okHttpClient: OkHttpClient,
-        json: Json
+        json: Json,
     ): TmapApi {
         val contentType = "application/json".toMediaType()
         return Retrofit.Builder()

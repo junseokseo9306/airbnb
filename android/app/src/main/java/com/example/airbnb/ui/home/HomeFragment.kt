@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -114,24 +114,6 @@ class HomeFragment : Fragment() {
         with(binding) {
             ibSearchButton.setOnClickListener {
                 moveToSearchFragment()
-//                findNavController().navigate(R.id.action_homeFragment_to_googleMap)
-//                calendarPopUp.setUpDefaultCalendar()
-//                val constraintsBuilder =
-//                    CalendarConstraints.Builder()
-//                        .setValidator(DateValidatorPointForward.now())
-//
-//                val dateRangePicker =
-//                    MaterialDatePicker.Builder.dateRangePicker()
-//                        .setTitleText("Select dates")
-//                        .setCalendarConstraints(constraintsBuilder.build())
-//                        .setTheme(R.style.CalendarTheme)
-//                        .build()
-//
-//                dateRangePicker.addOnPositiveButtonClickListener {
-//                    val backButtonFunctionPointer = HomeFragmentDirections.actionHomeFragmentToPriceBar()
-//                    findNavController().navigate(R.id.action_homeFragment_to_priceBar)
-//                }
-//                dateRangePicker.show(childFragmentManager, "CALENDAR")
             }
         }
     }
@@ -217,5 +199,4 @@ class HomeFragment : Fragment() {
         private const val AIRBNB_SAMPLE_IMAGE3 =
             "https://news.airbnb.com/wp-content/uploads/sites/4/2022/04/051.jpg?w=1000"
     }
-
 }

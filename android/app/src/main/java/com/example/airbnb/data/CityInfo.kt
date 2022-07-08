@@ -10,7 +10,7 @@ data class Image(
 
 data class CityInfo(
     val city: City,
-    val travelTime: Int = 30
+    val travelTime: Int = 30,
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readParcelable(City::class.java.classLoader) ?: City(

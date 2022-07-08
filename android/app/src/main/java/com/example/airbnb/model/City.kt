@@ -6,7 +6,7 @@ import android.os.Parcelable
 data class City(
     val cityName: String,
     val image: String,
-    val currentCoordinate: Coordinate
+    val currentCoordinate: Coordinate,
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
@@ -17,7 +17,7 @@ data class City(
 
     data class Coordinate(
         val latitude: Double,
-        val longitude: Double
+        val longitude: Double,
     ) : Parcelable {
         constructor(parcel: Parcel) : this(
             parcel.readDouble(),

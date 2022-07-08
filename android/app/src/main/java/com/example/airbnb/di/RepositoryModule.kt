@@ -17,7 +17,7 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun bindAirbnbRepository(
-        airbnbRepositoryImpl: AirbnbRepositoryImpl
+        airbnbRepositoryImpl: AirbnbRepositoryImpl,
     ): AirbnbRepository
 }
 
@@ -28,6 +28,6 @@ abstract class TmapRepositoryModule {
     @Singleton
     @Binds
     abstract fun bindTmapRepository(
-        tmapRepositoryImpl: TmapRepositoryImpl
+        tmapRepositoryImpl: TmapRepositoryImpl,
     ): TmapRepository
 }

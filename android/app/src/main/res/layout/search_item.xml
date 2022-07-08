@@ -28,5 +28,4 @@
         app:layout_constraintTop_toTopOf="@id/location_image"
         tools:text="양재동, 서초구, 서울특별시" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

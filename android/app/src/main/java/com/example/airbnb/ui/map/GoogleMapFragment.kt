@@ -12,7 +12,10 @@ import com.example.airbnb.R
 import com.example.airbnb.adapters.SearchListAdapter
 import com.example.airbnb.data.Accommodation
 import com.example.airbnb.databinding.FragmentGoogleMapBinding
-import com.google.android.gms.maps.*
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -27,10 +30,9 @@ class GoogleMapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var adapter: SearchListAdapter
     private lateinit var accommodationsList: List<Accommodation>
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_google_map, container, false)
         mapView = binding.googleMap
@@ -69,7 +71,9 @@ class GoogleMapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun drawCustomMarker(price: Int): Bitmap {
-        val bitmap = Bitmap.createBitmap(INITIAL_BITMAP_WIDTH, INITIAL_BITMAP_HEIGHT, Bitmap.Config.ARGB_8888)
+        val bitmap = Bitmap.createBitmap(INITIAL_BITMAP_WIDTH,
+            INITIAL_BITMAP_HEIGHT,
+            Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         val textColor = Paint().apply {
             color = Color.BLACK
@@ -82,12 +86,19 @@ class GoogleMapFragment : Fragment(), OnMapReadyCallback {
             strokeCap = Paint.Cap.ROUND
         }
         val decimalFormat = DecimalFormat("#,###")
-        canvas.drawRoundRect(RectF(0F, 0F, INITIAL_WIDTH, INITIAL_HEIGHT),10f, 10f, rectColor)
+        canvas.drawRoundRect(RectF(
+            INITIAL_LEFT,
+            INITIAL_TOP,
+            INITIAL_WIDTH,
+            INITIAL_HEIGHT), INITIAL_ROUND, INITIAL_ROUND, rectColor)
         canvas.drawText(
             getString(
                 R.string.google_map_custom_text_price_marker,
                 decimalFormat.format(price)
-            ), INITIAL_TEXT_WIDTH_START, INITIAL_TEXT_HEIGHT_START, textColor
+            ),
+            INITIAL_TEXT_WIDTH_START,
+            INITIAL_TEXT_HEIGHT_START,
+            textColor
         )
         return bitmap
     }
@@ -123,7 +134,6 @@ class GoogleMapFragment : Fragment(), OnMapReadyCallback {
             }
         }
     }
-
 
     override fun onStart() {
         super.onStart()
@@ -163,6 +173,8 @@ class GoogleMapFragment : Fragment(), OnMapReadyCallback {
         const val INITIAL_TEXT_SIZE = 50f
         const val INITIAL_TEXT_HEIGHT_START = 60f
         const val INITIAL_TEXT_WIDTH_START = 12f
+        const val INITIAL_LEFT = 0f
+        const val INITIAL_TOP = 0f
+        const val INITIAL_ROUND = 10f
     }
-
 }

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Copyright 2019 The Android Open Source Project
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -23,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/mtrl_calendar_day_height"
         android:focusable="true"
-        android:gravity="center_vertical|start"/>
+        android:gravity="center_vertical|start" />
 
     <com.example.airbnb.ui.custom.datepicker.MaterialCalendarGridView
         android:id="@+id/month_grid"
@@ -34,6 +33,6 @@
         android:gravity="center"
         android:horizontalSpacing="@dimen/mtrl_calendar_month_horizontal_padding"
         android:listSelector="@android:color/transparent"
-        android:verticalSpacing="@dimen/mtrl_calendar_month_vertical_padding"/>
+        android:verticalSpacing="@dimen/mtrl_calendar_month_vertical_padding" />
 
 </LinearLayout>

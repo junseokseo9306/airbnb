@@ -20,7 +20,8 @@ class SearchListAdapter(private val isVertical: Boolean = true) :
         }
     }
 
-    class HorizontalItemViewHolder(private val binding: AccommodationPagerItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class HorizontalItemViewHolder(private val binding: AccommodationPagerItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(accommodation: Accommodation) {
             binding.accommodation = accommodation
         }
@@ -63,5 +64,4 @@ private val diffUtil = object : DiffUtil.ItemCallback<Accommodation>() {
     override fun areContentsTheSame(oldItem: Accommodation, newItem: Accommodation): Boolean {
         return oldItem == newItem
     }
-
 }

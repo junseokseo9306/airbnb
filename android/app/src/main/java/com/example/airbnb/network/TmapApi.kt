@@ -10,6 +10,6 @@ interface TmapApi {
     @POST("routes?version=1&format=json&callback=result")
     suspend fun getTime(
         @Header("appKey") appKey: String,
-        @Body body: TmapRequest
+        @Body body: TmapRequest,
     ): TmapDto
 }

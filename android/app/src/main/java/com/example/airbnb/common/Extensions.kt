@@ -19,7 +19,7 @@ fun Context.hasPermission(permission: String): Boolean =
 
 fun Fragment.requestPermissionsResult(
     permissionArray: Array<String>,
-    permissionListener: OnRequestPermissionListener
+    permissionListener: OnRequestPermissionListener,
 ) {
 
     val launcher =

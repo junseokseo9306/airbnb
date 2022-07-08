@@ -1,11 +1,11 @@
 package com.example.airbnb.ui.pricebar
 
 import android.os.Bundle
-import androidx.core.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.util.Pair
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -32,7 +32,7 @@ class PriceBarFragment() : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_pricebar, container, false)
         return binding.root
@@ -67,7 +67,7 @@ class PriceBarFragment() : Fragment() {
 
     private fun setPriceRangeBarText(
         minPrice: Int,
-        maxPrice: Int
+        maxPrice: Int,
     ) = with(binding) {
         rangeSlider.values = listOf(minPrice.toFloat(), maxPrice.toFloat())
         rangeSlider.valueFrom = minPrice.toFloat()

@@ -77,7 +77,7 @@ class CustomResidentClickView(context: Context, attrs: AttributeSet) :
                 }
 
                 residentCount.text = count.toString()
-                onChangeClickCountListener?.onChanged( id,-1)
+                onChangeClickCountListener?.onChanged(id, -1)
             }
 
             addCountButton.setOnClickListener {
@@ -85,7 +85,7 @@ class CustomResidentClickView(context: Context, attrs: AttributeSet) :
                 setColor(subtractCountButton, R.color.black)
                 subtractCountButton.isEnabled = true
                 residentCount.text = count.toString()
-                onChangeClickCountListener?.onChanged(id,1)
+                onChangeClickCountListener?.onChanged(id, 1)
             }
         }
     }
