@@ -36,7 +36,7 @@ jobs:
         working-directory: ${{env.working-directory}}
 
       # 도커 빌드(도커 이미지 생성)
-      - name: Docker build
+      - name: Docker buildd
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker build -t ${{ secrets.DOCKER_USERNAME }}/codesquad-airbnb:1.0 .
